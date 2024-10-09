@@ -3,7 +3,8 @@
         "next/core-web-vitals",
         "eslint:recommended",
         "plugin:prettier/recommended",
-        "plugin:react/jsx-runtime"
+        "plugin:react/jsx-runtime",
+        "plugin:react/recommended"
     ],
     "rules": {
         "no-unused-vars": "off",
