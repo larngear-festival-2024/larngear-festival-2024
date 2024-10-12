@@ -3,15 +3,31 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 
-const geistSans = localFont({
-    src: './fonts/GeistVF.woff',
-    variable: '--font-geist-sans',
-    weight: '100 900',
+const bangkok = localFont({
+    src: [
+        { path: './fonts/bangkok/bold.ttf', weight: '700', style: 'normal' },
+        {
+            path: './fonts/bangkok/bold-italic.ttf',
+            weight: '700',
+            style: 'italic',
+        },
+        { path: './fonts/bangkok/regular.ttf', weight: '400', style: 'normal' },
+        {
+            path: './fonts/bangkok/regular-italic.ttf',
+            weight: '400',
+            style: 'italic',
+        },
+    ],
+    variable: '--font-bangkok',
 });
-const geistMono = localFont({
-    src: './fonts/GeistMonoVF.woff',
-    variable: '--font-geist-mono',
-    weight: '100 900',
+
+const sov = localFont({
+    src: [
+        { path: './fonts/sov/bold.ttf', weight: '700', style: 'normal' },
+        { path: './fonts/sov/italic.ttf', weight: '400', style: 'italic' },
+        { path: './fonts/sov/regular.ttf', weight: '400', style: 'normal' },
+    ],
+    variable: '--font-sov',
 });
 
 export const metadata: Metadata = {
@@ -27,7 +43,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${bangkok.variable} ${sov.variable} font-bangkok antialiased`}
             >
                 {children}
             </body>

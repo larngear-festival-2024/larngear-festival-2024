@@ -9,7 +9,17 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                bangkok: ['var(--font-bangkok)'],
+                sov: ['var(--font-sov)'],
+            },
             colors: {
+                'project-dark-blue': '#552CB8',
+                'project-light-blue': '#048CD6',
+                'project-dark-green': '#009A5E',
+                'project-red-orange': '#FF5A47',
+                'project-pink': '#FC7DA8',
+                'project-yellow': '#FFD011',
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 card: {
