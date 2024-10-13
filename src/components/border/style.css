@@ -1,5 +1,5 @@
 .cliped-border {
-    --width: min(80vw, 768px);
+    --width: min(90vw, 768px);
     --clip-radius: calc(var(--width)*0.2);
 
     background:
@@ -12,11 +12,13 @@
 
     padding: calc(var(--width)*0.008);
     width: var(--width);
-    min-height: 100dvh;
+    margin: auto;
+    margin-top: 2.5vh;
+    min-height: 95vh;
 }
 
 .cliped-content {
-    --width: min(80vw, 768px);
+    --width: min(90vw, 768px);
     --clip-radius: calc(var(--width)*0.2);
 
     background:
@@ -28,7 +30,7 @@
     background-repeat: no-repeat;
 
     width: 100%;
-    min-height: 100dvh;
+    min-height: 95dvh;
 
     padding-top: var(--clip-radius);
 }
