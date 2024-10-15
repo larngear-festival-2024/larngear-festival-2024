@@ -61,13 +61,13 @@ export default function Card() {
                     {stamps.map((Stamp, index) => (
                         <div
                             key={index}
-                            className={`grid place-items-center ${selected === index ? 'animate-pulse border-2 border-purple-500' : ''}`}
+                            className={`grid place-items-center ${selected === index && phase === 'sticker' ? 'animate-pulse border-2 border-purple-500' : ''}`}
                             onClick={() => setSelected(index)}
                         >
                             {Stamp !== '' && (
                                 <Image
                                     src={Stamp}
-                                    className="h-4/5 w-4/5 object-contain transition-transform duration-300"
+                                    className="h-4/5 w-4/5 overflow-hidden object-contain"
                                     alt={`Stamp ${index + 1}`}
                                     style={{
                                         transform: `rotate(${rotations[index]}deg)`,
