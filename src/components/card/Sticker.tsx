@@ -3,11 +3,12 @@ import Image from 'next/image';
 interface StickerProps {
     stickers: string[];
     selected: number | null;
+    handleStamps: (i: number, stamp: string) => void;
     handleSelected: (i: number) => void;
 }
 
 export default function Sticker(props: StickerProps) {
-    const { stickers, selected, handleSelected } = props;
+    const { stickers, selected, handleSelected, handleStamps } = props;
 
     return (
         <main className="flex h-52 w-72 flex-col rounded-2xl border-2 border-black bg-white">
@@ -29,7 +30,11 @@ export default function Sticker(props: StickerProps) {
 
             <section className="grid h-full grid-cols-3 grid-rows-2 gap-0 rounded-b-xl">
                 {stickers.map((Stamp, index) => (
-                    <div key={Stamp} className="grid place-items-center">
+                    <div
+                        key={Stamp}
+                        onClick={() => handleStamps(selected ?? 0, Stamp)}
+                        className="grid place-items-center"
+                    >
                         <Image
                             src={Stamp}
                             className="grid h-4/5 w-4/5 place-items-center object-contain"
