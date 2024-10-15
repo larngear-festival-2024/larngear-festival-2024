@@ -1,3 +1,5 @@
+import Border from '@/components/border';
+
 export default function Test() {
     return (
         <div className="flex min-h-screen flex-col items-center justify-items-center p-8 sm:p-20">
@@ -51,6 +53,12 @@ export default function Test() {
                     bg-project-yellow
                 </div>
             </div>
+            <Border>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga
+                praesentium, non officia soluta quaerat earum voluptatum
+                officiis. Repudiandae nesciunt modi cum nihil. Eos delectus nam
+                odio quae, aspernatur nisi ducimus.
+            </Border>
         </div>
     );
 }
