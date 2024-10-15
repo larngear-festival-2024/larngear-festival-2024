@@ -46,7 +46,9 @@ export default function RootLayout({
             <body
                 className={`${bangkok.variable} ${sov.variable} font-bangkok antialiased`}
             >
-                <Background>{children}</Background>
+                <div className="mx-auto min-h-dvh max-w-md overflow-hidden">
+                    <Background>{children}</Background>
+                </div>
             </body>
         </html>
     );
