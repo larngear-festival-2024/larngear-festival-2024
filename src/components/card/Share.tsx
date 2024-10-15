@@ -20,7 +20,7 @@ export default function Share(props: ShareProps) {
     }, [date]);
 
     return (
-        <main className="flex h-52 flex-col items-center gap-5 text-3xl text-white">
+        <main className="flex flex-col items-center gap-5 text-3xl text-white">
             <div className="rounded-xl bg-yellow-400 px-8 py-5 text-purple-700">
                 {name}
             </div>

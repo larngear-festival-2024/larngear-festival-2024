@@ -10,7 +10,7 @@ export default function Name(props: NameProps) {
     const { name, handleKeyPressed, handleNameChanged } = props;
 
     return (
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex h-52 flex-col items-center gap-8">
             <h1 className="text-3xl text-white">บัตรนี้แสดงตนถึง</h1>
             <input
                 type="text"

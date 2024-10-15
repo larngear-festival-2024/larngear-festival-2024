@@ -102,7 +102,7 @@ export default function Card() {
                 {phase === 'share' && <Share name={name} />}
                 <button
                     onClick={handleNextPhase}
-                    className={`absolute bottom-20 h-12 w-64 rounded-lg border-2 border-black ${phase !== 'share' ? 'bg-project-light-blue' : 'bg-project-red-orange'} text-3xl text-white`}
+                    className={`h-12 w-64 rounded-lg border-2 border-black ${phase !== 'share' ? 'bg-project-light-blue' : 'bg-project-red-orange'} text-3xl text-white`}
                 >
                     {phase !== 'share' ? 'ไปกันต่อ!' : 'แชร์ผลลัพธ์'}
                 </button>
