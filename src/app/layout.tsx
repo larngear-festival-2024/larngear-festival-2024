@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import Background from '@/components/background';
 
 const bangkok = localFont({
     src: [
@@ -45,7 +46,9 @@ export default function RootLayout({
             <body
                 className={`${bangkok.variable} ${sov.variable} max-w-screen-md font-bangkok antialiased`}
             >
-                {children}
+                <div className="mx-auto min-h-dvh max-w-md overflow-hidden">
+                    <Background>{children}</Background>
+                </div>
             </body>
         </html>
     );
