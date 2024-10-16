@@ -1,3 +1,5 @@
+import Button from '@/components/button';
+
 export default function Test() {
     return (
         <div className="flex min-h-screen flex-col items-center justify-items-center p-8 sm:p-20">
@@ -49,6 +51,9 @@ export default function Test() {
                 </div>
                 <div className="flex h-40 w-40 items-center justify-center bg-project-yellow">
                     bg-project-yellow
+                </div>
+                <div>
+                    <Button>test</Button>
                 </div>
             </div>
         </div>
