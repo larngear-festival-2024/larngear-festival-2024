@@ -4,8 +4,9 @@ import Logo from '@/components/logo';
 import Tape from '@/components/tape';
 import TimerCard from '@/components/timercard';
 import { useEffect, useState } from 'react';
+import { Icon } from '@iconify/react';
 
-const OPENING_TIME = +new Date(2024, 9, 18, 0, 0, 0, 0);
+const OPENING_TIME = +new Date(2024, 10, 9, 0, 0, 0, 0);
 
 interface TimeLeft {
     days: number;
@@ -69,7 +70,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                     </Button>
                 </div>
 
-                {/* Timer - "00" initially, actual time after hydration */}
+                {/* Timer */}
                 <div className="flex flex-col items-center">
                     <div className="mt-8 flex flex-row space-x-4">
                         <TimerCard
@@ -118,7 +119,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                         />
                     </div>
                     {/* Timer labels */}
-                    <div className="text-1xl mt-8 flex h-[32px] w-[283px] items-center justify-center rounded-md bg-project-yellow text-center font-sov text-black">
+                    <div className="mt-8 flex h-[32px] w-[283px] items-center justify-center rounded-md bg-project-yellow text-center font-sov text-xl text-black">
                         {timeLeft?.days && timeLeft?.days > 1
                             ? 'DAYS '
                             : 'DAY '}{' '}
@@ -128,8 +129,15 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
             </div>
 
             {/* Footer */}
-            <div className="text-1xl flex h-[52px] w-full flex-col items-center justify-center gap-2.5 rounded-tl-lg rounded-tr-lg bg-project-yellow px-[104px] py-4 font-sov text-black">
-                [icon] @larngearfest2024
+            <div className="flex h-[52px] w-full flex-row items-center justify-center gap-2.5 rounded-tl-lg rounded-tr-lg bg-project-yellow px-[104px] py-4 font-sov text-xl text-black">
+                <span>
+                    {' '}
+                    <Icon
+                        icon="akar-icons:instagram-fill"
+                        style={{ fontSize: '24px' }}
+                    />
+                </span>
+                @larngearfest2024
             </div>
         </div>
     );
