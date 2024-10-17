@@ -6,7 +6,7 @@ import TimerCard from '@/components/timercard';
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 
-const OPENING_TIME = +new Date(2024, 10, 9, 0, 0, 0, 0);
+const OPENING_TIME = +new Date(2024, 10, 7, 0, 0, 0, 0);
 
 interface TimeLeft {
     days: number;
