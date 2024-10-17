@@ -1,4 +1,4 @@
-import Button from '@/components/button';
+import Border from '@/components/border';
 
 export default function Test() {
     return (
@@ -52,10 +52,13 @@ export default function Test() {
                 <div className="flex h-40 w-40 items-center justify-center bg-project-yellow">
                     bg-project-yellow
                 </div>
-                <div>
-                    <Button>test</Button>
-                </div>
             </div>
+            <Border>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga
+                praesentium, non officia soluta quaerat earum voluptatum
+                officiis. Repudiandae nesciunt modi cum nihil. Eos delectus nam
+                odio quae, aspernatur nisi ducimus.
+            </Border>
         </div>
     );
 }
