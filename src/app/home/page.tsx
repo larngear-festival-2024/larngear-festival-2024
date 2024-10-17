@@ -3,7 +3,6 @@ import Button from '@/components/button';
 import Logo from '@/components/logo';
 import Tape from '@/components/tape';
 import TimerCard from '@/components/timercard';
-import { log } from 'console';
 import { useEffect, useState } from 'react';
 
 const OPENING_TIME = +new Date(2024, 9, 18, 0, 0, 0, 0);
@@ -23,7 +22,6 @@ const calculateTimeLeft: (time: number) => TimeLeft | null = (time) => {
     const minuteLeft = Math.floor((timeDiff / 1000 / 60) % 60);
     const secondLeft = Math.floor((timeDiff / 1000) % 60);
 
-    console.log(dayLeft);
     if (timeDiff > 0) {
         return {
             days: dayLeft,
@@ -37,11 +35,15 @@ const calculateTimeLeft: (time: number) => TimeLeft | null = (time) => {
 };
 
 export default function Home({ until = OPENING_TIME }: { until?: number }) {
-    const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(
-        calculateTimeLeft(until)
-    );
+    const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+    const [timerReady, setTimerReady] = useState(false); // Track when the timer is ready
 
     useEffect(() => {
+        // Only start the timer after the component mounts on the client
+        setTimerReady(true);
+
+        setTimeLeft(calculateTimeLeft(until));
+
         const interval = setInterval(() => {
             setTimeLeft(calculateTimeLeft(until));
         }, 1000);
@@ -50,7 +52,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
     }, [until]);
 
     return (
-        <div className="flex h-screen w-full flex-col items-center justify-between overflow-y-auto">
+        <div className="flex h-screen w-full flex-col items-center justify-between">
             {/* Main */}
             <div className="mb-[71px] mt-[64px] flex h-[709px] w-[347px] flex-grow flex-col items-center justify-start">
                 <div className="mt-4 flex justify-center">
@@ -67,27 +69,60 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                     </Button>
                 </div>
 
+                {/* Timer - "00" initially, actual time after hydration */}
                 <div className="flex flex-col items-center">
                     <div className="mt-8 flex flex-row space-x-4">
                         <TimerCard
                             bgClass="bg-project-light-blue"
-                            num={timeLeft?.days ?? 0}
+                            text={
+                                timerReady
+                                    ? String(timeLeft?.days ?? 0).padStart(
+                                          2,
+                                          '0'
+                                      )
+                                    : '00'
+                            }
                         />
                         <TimerCard
                             bgClass="bg-project-yellow"
-                            num={timeLeft?.hours ?? 0}
+                            text={
+                                timerReady
+                                    ? String(timeLeft?.hours ?? 0).padStart(
+                                          2,
+                                          '0'
+                                      )
+                                    : '00'
+                            }
                         />
                         <TimerCard
                             bgClass="bg-project-pink"
-                            num={timeLeft?.minutes ?? 0}
+                            text={
+                                timerReady
+                                    ? String(timeLeft?.minutes ?? 0).padStart(
+                                          2,
+                                          '0'
+                                      )
+                                    : '00'
+                            }
                         />
                         <TimerCard
                             bgClass="bg-project-dark-green"
-                            num={timeLeft?.seconds ?? 0}
+                            text={
+                                timerReady
+                                    ? String(timeLeft?.seconds ?? 0).padStart(
+                                          2,
+                                          '0'
+                                      )
+                                    : '00'
+                            }
                         />
                     </div>
+                    {/* Timer labels */}
                     <div className="text-1xl mt-8 flex h-[32px] w-[283px] items-center justify-center rounded-md bg-project-yellow text-center font-sov text-black">
-                        DAYS : HOURS : MINUTES : SECONDS
+                        {timeLeft?.days && timeLeft?.days > 1
+                            ? 'DAYS '
+                            : 'DAY '}{' '}
+                        : HOURS : MINUTES : SECONDS
                     </div>
                 </div>
             </div>
