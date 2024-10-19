@@ -1,6 +1,6 @@
 .cliped-border {
     --width: min(90vw, 768px);
-    --clip-radius: calc(var(--width)*0.2);
+    --clip-radius: calc(var(--width)*0.16);
 
     background:
         radial-gradient(circle at top left, transparent var(--clip-radius), black 0) top left,
@@ -19,7 +19,7 @@
 
 .cliped-content {
     --width: min(90vw, 768px);
-    --clip-radius: calc(var(--width)*0.2);
+    --clip-radius: calc(var(--width)*0.16);
 
     background:
         radial-gradient(circle at top left, transparent var(--clip-radius), #552CB8 0) top left,
