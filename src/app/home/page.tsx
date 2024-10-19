@@ -5,6 +5,7 @@ import Tape from '@/components/tape';
 import TimerCard from '@/components/timercard';
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
+import Link from 'next/link';
 
 const OPENING_TIME = +new Date(2024, 10, 7, 0, 0, 0, 0);
 
@@ -137,7 +138,9 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                         style={{ fontSize: '24px' }}
                     />
                 </span>
-                @larngearfest2024
+                <Link href="https://www.instagram.com/larngearfest2024/">
+                    @larngearfest2024
+                </Link>
             </div>
         </div>
     );
