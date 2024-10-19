@@ -1,10 +1,15 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ComponentPropsWithoutRef } from 'react';
 import './style.css';
+import { cn } from '@/lib/utils';
 
-export default function Border({ children }: { children: ReactNode }) {
+interface BorderProps extends ComponentPropsWithoutRef<'div'> {
+    children: ReactNode;
+}
+
+export default function Border({ children, className }: BorderProps) {
     return (
-        <div className="cliped-border">
-            <div className="cliped-content">{children}</div>
+        <div className={'cliped-boder'}>
+            <div className={cn('cliped-content', className)}>{children}</div>
         </div>
     );
 }

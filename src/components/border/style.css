@@ -1,6 +1,6 @@
 .cliped-border {
-    --width: min(90vw, 768px);
-    --clip-radius: calc(var(--width)*0.16);
+    --width: min(90vw, 358px);
+    --clip-radius: calc(var(--width)*0.2);
 
     background:
         radial-gradient(circle at top left, transparent var(--clip-radius), black 0) top left,
@@ -10,16 +10,15 @@
     background-size: 50% 50%;
     background-repeat: no-repeat;
 
-    padding: calc(var(--width)*0.008);
+    /* padding: calc(var(--width)*0.008); */
     width: var(--width);
     margin: auto;
-    margin-top: 2.5vh;
     min-height: 95vh;
 }
 
 .cliped-content {
-    --width: min(90vw, 768px);
-    --clip-radius: calc(var(--width)*0.16);
+    --width: min(90vw, 358px);
+    --clip-radius: calc(var(--width)*0.2);
 
     background:
         radial-gradient(circle at top left, transparent var(--clip-radius), #552CB8 0) top left,
@@ -32,5 +31,5 @@
     width: 100%;
     min-height: 95dvh;
 
-    padding-top: var(--clip-radius);
+    /* padding-top: var(--clip-radius); */
 }
