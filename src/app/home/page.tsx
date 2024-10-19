@@ -130,18 +130,18 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
             </div>
 
             {/* Footer */}
-            <div className="flex h-[52px] w-full flex-row items-center justify-center gap-2.5 rounded-tl-lg rounded-tr-lg bg-project-yellow px-[104px] py-4 font-sov text-xl text-black">
+            <Link
+                href="https://www.instagram.com/larngearfest2024/"
+                className="flex w-full flex-row items-center justify-center gap-2.5 rounded-tl-lg rounded-tr-lg bg-project-yellow px-[104px] py-4 font-sov text-xl text-black"
+            >
                 <span>
-                    {' '}
                     <Icon
                         icon="akar-icons:instagram-fill"
                         style={{ fontSize: '24px' }}
                     />
                 </span>
-                <Link href="https://www.instagram.com/larngearfest2024/">
-                    @larngearfest2024
-                </Link>
-            </div>
+                @larngearfest2024
+            </Link>
         </div>
     );
 }
