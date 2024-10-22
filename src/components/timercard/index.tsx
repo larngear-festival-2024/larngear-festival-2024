@@ -1,9 +1,16 @@
-import cn from 'classnames';
+import { cn } from '@/lib/utils';
 
 interface TimerCardProps {
     bgClass: string;
     text: string;
 }
+
+/**
+ * Button component that renders a styled button element.
+ *
+ * @param {string} bgClass - Optional additional class names to apply to the card.
+ * @param {string} text - Optional text to be rendered inside the card.
+ */
 
 export default function TimerCard({ bgClass, text }: TimerCardProps) {
     return (

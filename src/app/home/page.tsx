@@ -6,6 +6,7 @@ import TimerCard from '@/components/timercard';
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import Footer from '@/components/footer';
 
 const OPENING_TIME = +new Date(2024, 10, 7, 0, 0, 0, 0);
 
@@ -54,9 +55,9 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
     }, [until]);
 
     return (
-        <div className="flex h-screen w-full flex-col items-center justify-between">
+        <div className="flex min-h-screen w-full flex-col items-center justify-between">
             {/* Main */}
-            <div className="mb-[71px] mt-[64px] flex h-[709px] w-[347px] flex-grow flex-col items-center justify-start">
+            <div className="mt-[64px] flex h-[709px] w-[347px] flex-grow flex-col items-center justify-start">
                 <div className="mt-4 flex justify-center">
                     <Logo />
                 </div>
@@ -82,7 +83,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                                           2,
                                           '0'
                                       )
-                                    : '00'
+                                    : '--'
                             }
                         />
                         <TimerCard
@@ -93,7 +94,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                                           2,
                                           '0'
                                       )
-                                    : '00'
+                                    : '--'
                             }
                         />
                         <TimerCard
@@ -104,7 +105,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                                           2,
                                           '0'
                                       )
-                                    : '00'
+                                    : '--'
                             }
                         />
                         <TimerCard
@@ -115,7 +116,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
                                           2,
                                           '0'
                                       )
-                                    : '00'
+                                    : '--'
                             }
                         />
                     </div>
@@ -130,18 +131,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
             </div>
 
             {/* Footer */}
-            <Link
-                href="https://www.instagram.com/larngearfest2024/"
-                className="flex w-full flex-row items-center justify-center gap-2.5 rounded-tl-lg rounded-tr-lg bg-project-yellow px-[104px] py-4 font-sov text-xl text-black"
-            >
-                <span>
-                    <Icon
-                        icon="akar-icons:instagram-fill"
-                        style={{ fontSize: '24px' }}
-                    />
-                </span>
-                @larngearfest2024
-            </Link>
+            <Footer />
         </div>
     );
 }
