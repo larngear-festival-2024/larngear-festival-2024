@@ -59,7 +59,7 @@ export default function Home({ until = OPENING_TIME }: { until?: number }) {
             {/* Main */}
             <div className="mt-[64px] flex h-[709px] w-[347px] flex-grow flex-col items-center justify-start">
                 <div className="mt-4 flex justify-center">
-                    <Logo />
+                    <Logo size={230} />
                 </div>
                 <div className="relative flex h-[211px] w-[307px] flex-col items-center p-[32px]">
                     <div className="absolute">
