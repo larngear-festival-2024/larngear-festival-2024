@@ -43,8 +43,12 @@ const IntroPage = ({
                     className="rounded-full border-2 border-project-dark-blue bg-project-dark-blue text-white"
                 />
             </button>
+
             <div onClick={() => router.push(nextPage)}>
-                <Border className="flex flex-col items-center space-y-16 p-8">
+                <Border
+                    innerClassName="flex flex-col items-center space-y-16 p-8"
+                    className="!mt-0"
+                >
                     <Logo size={94} />
                     <GifContainer />
                     {message}

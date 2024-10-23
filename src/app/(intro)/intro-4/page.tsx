@@ -5,7 +5,7 @@ const Intro4Page = () => {
     return (
         <IntroPage
             message={
-                <div className="space-y-4 text-nowrap text-center text-4xl font-normal text-white">
+                <div className="text-nowrap text-center text-4xl font-normal text-white">
                     <p>คุณจึงรีบทำตั๋วงานขึ้นมาใหม่</p>
                     <p>ในรูปแบบของคุณเอง!!!</p>
                 </div>
