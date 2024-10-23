@@ -32,7 +32,7 @@ const IntroPage = ({
                     <Logo size={94} />
                     <GifContainer />
                     {message}
-                    <div className="flex w-full items-center justify-end space-x-1">
+                    <div className="flex w-full animate-bounce items-center justify-end space-x-1">
                         <div className="flex flex-col items-center font-sov text-base font-normal text-white">
                             <p>Tap to</p>
                             <p>continue</p>
