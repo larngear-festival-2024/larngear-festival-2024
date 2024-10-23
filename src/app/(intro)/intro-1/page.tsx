@@ -10,6 +10,7 @@ const Intro1Page = () => {
                 </div>
             }
             nextPage="/intro-2"
+            previousPage="/"
         />
     );
 };
