@@ -8,7 +8,7 @@ interface BorderProps extends ComponentPropsWithoutRef<'div'> {
 
 export default function Border({ children, className }: BorderProps) {
     return (
-        <div className={'cliped-boder'}>
+        <div className={'cliped-border'}>
             <div className={cn('cliped-content', className)}>{children}</div>
         </div>
     );
