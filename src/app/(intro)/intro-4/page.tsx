@@ -6,14 +6,11 @@ const Intro4Page = () => {
         <IntroPage
             message={
                 <div className="space-y-4 text-nowrap text-center text-4xl font-normal text-white">
-                    <p>
-                        ก่อนที่จะตัดสินใจ
-                        <span className="text-project-yellow">ปลอมแปลง</span>
-                    </p>
-                    <p className="text-7xl">ตั๋วเข้างาน</p>
-                    <p>ขึ้นมาใหม่</p>
+                    <p>คุณจึงรีบทำตั๋วงานขึ้นมาใหม่</p>
+                    <p>ในรูปแบบของคุณเอง!!!</p>
                 </div>
             }
+            previousPage="/intro-3"
             nextPage="/game-1"
         />
     );

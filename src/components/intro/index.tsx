@@ -1,10 +1,10 @@
 import React, { ComponentPropsWithoutRef, ReactNode } from 'react';
 import Border from '@/components/border';
 import Logo from '@/components/logo';
-import Button from '@/components/button';
+
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import GifContainer from '@/components/intro/GifContainer';
 
 interface IntroPageProps extends ComponentPropsWithoutRef<'section'> {
@@ -27,16 +27,20 @@ const IntroPage = ({
                     className="rounded-full border-2 border-project-dark-blue bg-project-dark-blue text-white"
                 />
             </Link>
-            <Border className="flex flex-col items-center space-y-16 p-8">
-                <Logo size={94} />
-                <GifContainer />
-                {message}
-                <Link href={nextPage}>
-                    <Button className="h-12 w-[263px] text-center text-4xl font-normal text-white">
-                        ต่อไป !
-                    </Button>
-                </Link>
-            </Border>
+            <Link href={nextPage}>
+                <Border className="flex h-[716px] flex-col items-center justify-end space-y-16 p-8">
+                    <Logo size={94} />
+                    <GifContainer />
+                    {message}
+                    <div className="flex w-full items-center justify-end space-x-1">
+                        <div className="flex flex-col items-center font-sov text-base font-normal text-white">
+                            <p>Tap to</p>
+                            <p>continue</p>
+                        </div>
+                        <ChevronRight size={33} color="white" />
+                    </div>
+                </Border>
+            </Link>
         </section>
     );
 };

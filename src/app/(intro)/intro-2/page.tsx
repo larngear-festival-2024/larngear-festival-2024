@@ -6,15 +6,13 @@ const Intro2Page = () => {
         <IntroPage
             message={
                 <div className="text-nowrap text-center text-4xl font-normal text-white">
-                    <span className="text-nowrap text-project-yellow">
-                        ทุกฝีก้าวของคุณมีความหมาย
-                    </span>
-                    <p>ไม่ว่าจะเป็น</p>
-                    <p>ระยะที่ใกล้กับงานมากขึ้น</p>
-                    <p>หรือว่า..</p>
+                    <p>ทันใดนั้นเอง...</p>
+                    <p>มีอะไรบางอย่าง...</p>
+                    <p>หล่นออกจากกระเป๋า</p>
                 </div>
             }
             nextPage="/intro-3"
+            previousPage="/intro-1"
         />
     );
 };
