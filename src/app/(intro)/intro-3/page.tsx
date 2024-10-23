@@ -5,11 +5,13 @@ const Intro3Page = () => {
     return (
         <IntroPage
             message={
-                <div className="space-y-8 text-nowrap text-center text-4xl font-normal text-white">
-                    <p>“แย่แล้วสิ !”</p>
-                    <p>คุณได้อุทานขึ้นมา</p>
+                <div className="text-nowrap text-center text-4xl font-normal text-white">
+                    <p>เมื่อคุณรู้ตัวอีกที...</p>
+                    <p>ตั๋วอันแสนสำคัญของคุณ</p>
+                    <p>กลับหายไป!!!</p>
                 </div>
             }
+            previousPage="/intro-2"
             nextPage="/intro-4"
         />
     );
