@@ -4,12 +4,20 @@ import { cn } from '@/lib/utils';
 
 interface BorderProps extends ComponentPropsWithoutRef<'div'> {
     children: ReactNode;
+    className?: string;
+    innerClassName?: string;
 }
 
-export default function Border({ children, className }: BorderProps) {
+export default function Border({
+    children,
+    className,
+    innerClassName,
+}: BorderProps) {
     return (
-        <div className={'cliped-border'}>
-            <div className={cn('cliped-content', className)}>{children}</div>
+        <div className={cn('cliped-border', className)}>
+            <div className={cn('cliped-content', innerClassName)}>
+                {children}
+            </div>
         </div>
     );
 }
