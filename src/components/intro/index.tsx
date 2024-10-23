@@ -1,11 +1,17 @@
-import React, { ComponentPropsWithoutRef, ReactNode } from 'react';
+'use client';
+import React, {
+    ComponentPropsWithoutRef,
+    ReactNode,
+    useState,
+    useEffect,
+} from 'react';
 import Border from '@/components/border';
 import Logo from '@/components/logo';
-
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import GifContainer from '@/components/intro/GifContainer';
+import TapToContinueButton from '@/components/intro/TapToContinueButton';
+import { useRouter } from 'next/navigation';
 
 interface IntroPageProps extends ComponentPropsWithoutRef<'section'> {
     message: ReactNode;
@@ -19,28 +25,32 @@ const IntroPage = ({
     nextPage,
     previousPage,
 }: IntroPageProps) => {
+    const router = useRouter();
+    const [canContinue, setCanContinue] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setCanContinue(true);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
     return (
         <section className={cn('px-4 py-6', className)}>
-            <Link href={previousPage}>
+            <button onClick={() => router.push(previousPage)}>
                 <ChevronLeft
                     size={33}
                     className="rounded-full border-2 border-project-dark-blue bg-project-dark-blue text-white"
                 />
-            </Link>
-            <Link href={nextPage}>
-                <Border className="flex h-[716px] flex-col items-center justify-end space-y-16 p-8">
+            </button>
+            <div onClick={() => router.push(nextPage)}>
+                <Border className="flex flex-col items-center space-y-16 p-8">
                     <Logo size={94} />
                     <GifContainer />
                     {message}
-                    <div className="flex w-full animate-bounce items-center justify-end space-x-1">
-                        <div className="flex flex-col items-center font-sov text-base font-normal text-white">
-                            <p>Tap to</p>
-                            <p>continue</p>
-                        </div>
-                        <ChevronRight size={33} color="white" />
-                    </div>
+                    <TapToContinueButton showTapToContinue={canContinue} />
                 </Border>
-            </Link>
+            </div>
         </section>
     );
 };
