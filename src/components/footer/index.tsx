@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="flex w-full flex-row items-center justify-center gap-2.5 rounded-tl-lg rounded-tr-lg bg-project-yellow px-[104px] py-4 font-sov text-xl text-black">
             <Link
                 href="https://www.instagram.com/larngearfest2024/"
-                className="flex w-full flex-row items-center justify-center gap-2.5"
+                className="mx-auto flex flex-row items-center justify-center gap-2.5"
             >
                 <span>
                     <Icon
