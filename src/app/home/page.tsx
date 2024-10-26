@@ -4,8 +4,6 @@ import Logo from '@/components/logo';
 import Tape from '@/components/tape';
 import TimerCard from '@/components/timercard';
 import { useEffect, useState } from 'react';
-import { Icon } from '@iconify/react';
-import Link from 'next/link';
 import Footer from '@/components/footer';
 
 const OPENING_TIME = +new Date(2024, 10, 7, 0, 0, 0, 0);
@@ -37,7 +35,7 @@ const calculateTimeLeft: (time: number) => TimeLeft | null = (time) => {
     }
 };
 
-export default function Home({ until = OPENING_TIME }: { until?: number }) {
+export default function Home({ until = OPENING_TIME }: { until: number }) {
     const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
     const [timerReady, setTimerReady] = useState(false); // Track when the timer is ready
 
