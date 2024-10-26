@@ -20,6 +20,7 @@ import Stamp13 from '@public/card/stamp13.svg';
 import Logo from '@public/logo.svg';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import ChooseColor from '@/components/card/color/ChooseColor';
 
 type CardMode = 'sticker' | 'name' | 'share';
 
@@ -67,7 +68,7 @@ export default function Card() {
 
     return (
         <Border>
-            <main className="flex flex-col items-center justify-center gap-9 p-2">
+            <main className="flex flex-col items-center justify-center gap-6 p-2">
                 <Image
                     src={Logo}
                     alt="logo"
@@ -104,6 +105,16 @@ export default function Card() {
                         ))}
                     </div>
                 </section>
+                {phase === 'name' && (
+                    <Name
+                        name={name}
+                        handleKeyPressed={handleKeyPress}
+                        handleNameChanged={setName}
+                    />
+                )}
+
+                <ChooseColor />
+
                 {phase === 'sticker' && (
                     <Sticker
                         stickers={Stamps}
@@ -112,13 +123,7 @@ export default function Card() {
                         handleStamps={handleSelectedStamp}
                     />
                 )}
-                {phase === 'name' && (
-                    <Name
-                        name={name}
-                        handleKeyPressed={handleKeyPress}
-                        handleNameChanged={setName}
-                    />
-                )}
+
                 {phase === 'share' && <Share name={name} />}
                 <button
                     onClick={handleNextPhase}
