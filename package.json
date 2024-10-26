@@ -42,5 +42,6 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.9.0"
 }
