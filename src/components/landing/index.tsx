@@ -35,7 +35,7 @@ const calculateTimeLeft: (time: number) => TimeLeft | null = (time) => {
     }
 };
 
-export default function Home({ until = OPENING_TIME }: { until?: number }) {
+export default function Landing({ until = OPENING_TIME }: { until?: number }) {
     const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
     const [timerReady, setTimerReady] = useState(false); // Track when the timer is ready
 
