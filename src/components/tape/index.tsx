@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import tape from '@public/tape.svg';
 
 /**
  * Logo component that displays an image with a specified size.
@@ -7,5 +8,5 @@ import React from 'react';
  */
 
 export default function Tape({ size = 200 }: { size?: number }) {
-    return <Image src="tape.svg" alt="tape" width={size} height={size} />;
+    return <Image src={tape} alt="tape" width={size} height={size} />;
 }

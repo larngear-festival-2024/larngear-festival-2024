@@ -3,6 +3,7 @@ import Button from '@/components/button';
 import Logo from '@/components/logo';
 import Tape from '@/components/tape';
 import TimerCard from '@/components/timercard';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Footer from '@/components/footer';
 
@@ -64,11 +65,11 @@ export default function Landing({ until = OPENING_TIME }: { until?: number }) {
                         <Tape size={300} />
                     </div>
                 </div>
-                <div className="z-20">
+                <Link href="/intro-1" className="z-20">
                     <Button className="-mt-[66px] h-[65px] w-[263px] justify-center bg-project-dark-blue text-4xl text-white">
                         เริ่มต้น
                     </Button>
-                </div>
+                </Link>
 
                 {/* Timer */}
                 <div className="flex flex-col items-center">
