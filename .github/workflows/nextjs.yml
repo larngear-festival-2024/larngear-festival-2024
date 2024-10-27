@@ -34,6 +34,11 @@ jobs:
       - name: Install dependencies
         run: |
             pnpm i
+      - name: Create env file
+        run: |
+            touch .env
+            echo BasePath=/larngear-festival-2024 >> .env
+            cat .env
       - name: Building
         run: |
             pnpm build
