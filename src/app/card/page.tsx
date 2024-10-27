@@ -3,7 +3,6 @@ import Border from '@/components/border';
 import Name from '@/components/card/Name';
 import Share from '@/components/card/Share';
 import Sticker from '@/components/card/Sticker';
-import BG from '@public/card/bg.svg';
 import Stamp1 from '@public/card/stamp1.svg';
 import Stamp2 from '@public/card/stamp2.svg';
 import Stamp3 from '@public/card/stamp3.svg';
@@ -21,8 +20,9 @@ import Logo from '@public/logo.svg';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import ChooseColor from '@/components/card/color/ChooseColor';
+import ChooseStamp from '@/components/card/ChooseStamp';
 
-type CardMode = 'sticker' | 'name' | 'share';
+export type CardMode = 'sticker' | 'name' | 'share';
 
 const Stamps = [
     Stamp1,
@@ -40,7 +40,6 @@ const Stamps = [
     Stamp13,
 ];
 const phases: CardMode[] = ['sticker', 'name', 'share'];
-const rotations = [-15, 0, 15, -15, 0, 15];
 
 export default function Card() {
     const [phase, setPhase] = useState<CardMode>('sticker');
@@ -68,43 +67,25 @@ export default function Card() {
 
     return (
         <Border>
-            <main className="flex flex-col items-center justify-center gap-6 p-2">
-                <Image
-                    src={Logo}
-                    alt="logo"
-                    width={phase === 'share' ? 158 : 84.54}
-                    height={phase === 'share' ? 176 : 94.38}
-                />
-                <section className="relative h-[195.39px] w-full max-w-[300px]">
-                    <Image
-                        src={BG}
-                        alt="background"
-                        layout="fill"
-                        objectFit="cover"
-                        className="absolute left-0 top-0"
-                    />
+            <main className="flex flex-col items-center justify-center gap-9 p-2">
+                {phase === 'share' && <Share name={name} />}
 
-                    <div className="z-1 relative grid h-full w-full grid-cols-3 grid-rows-2">
-                        {stamps.map((Stamp, index) => (
-                            <div
-                                key={index}
-                                className={`grid place-items-center ${selected === index && phase === 'sticker' ? 'animate-pulse border-2 border-purple-500' : ''}`}
-                                onClick={() => setSelected(index)}
-                            >
-                                {Stamp !== '' && (
-                                    <Image
-                                        src={Stamp}
-                                        className="h-4/5 w-4/5 overflow-hidden object-contain"
-                                        alt={`Stamp ${index + 1}`}
-                                        style={{
-                                            transform: `rotate(${rotations[index]}deg)`,
-                                        }}
-                                    />
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </section>
+                {phase !== 'share' && (
+                    <>
+                        <Image
+                            src={Logo}
+                            alt="logo"
+                            width={84.54}
+                            height={94.38}
+                        />
+                        <ChooseStamp
+                            stamps={stamps}
+                            setSelected={setSelected}
+                            phase={phase}
+                            selected={selected}
+                        />
+                    </>
+                )}
                 {phase === 'name' && (
                     <Name
                         name={name}
@@ -113,7 +94,7 @@ export default function Card() {
                     />
                 )}
 
-                <ChooseColor />
+                {phase !== 'share' && <ChooseColor />}
 
                 {phase === 'sticker' && (
                     <Sticker
@@ -124,7 +105,6 @@ export default function Card() {
                     />
                 )}
 
-                {phase === 'share' && <Share name={name} />}
                 <button
                     onClick={handleNextPhase}
                     className={`h-12 w-64 rounded-lg border-2 border-black ${phase !== 'share' ? 'bg-project-light-blue' : 'bg-project-red-orange'} text-3xl text-white`}
