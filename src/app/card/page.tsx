@@ -68,7 +68,7 @@ export default function Card() {
     return (
         <Border>
             <main className="flex flex-col items-center justify-center gap-9 p-2">
-                {phase === 'share' && <Share name={name} />}
+                {phase === 'share' && <Share stamps={stamps} name={name} />}
 
                 {phase !== 'share' && (
                     <>
@@ -105,12 +105,14 @@ export default function Card() {
                     />
                 )}
 
-                <button
-                    onClick={handleNextPhase}
-                    className={`h-12 w-64 rounded-lg border-2 border-black ${phase !== 'share' ? 'bg-project-light-blue' : 'bg-project-red-orange'} text-3xl text-white`}
-                >
-                    {phase !== 'share' ? 'ไปกันต่อ!' : 'แชร์ผลลัพธ์'}
-                </button>
+                {phase !== 'share' && (
+                    <button
+                        onClick={handleNextPhase}
+                        className="h-12 w-64 rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white"
+                    >
+                        ไปกันต่อ!
+                    </button>
+                )}
             </main>
         </Border>
     );
