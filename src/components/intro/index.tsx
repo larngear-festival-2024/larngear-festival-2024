@@ -27,13 +27,21 @@ const IntroPage = ({
 }: IntroPageProps) => {
     const router = useRouter();
     const [canContinue, setCanContinue] = useState(false);
+    const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const messageTimer = setTimeout(() => {
+            setShowMessage(true);
+        }, 1000);
+
+        const continueTimer = setTimeout(() => {
             setCanContinue(true);
         }, 3000);
 
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(messageTimer);
+            clearTimeout(continueTimer);
+        };
     }, []);
     return (
         <section className={cn('px-4 py-6', className)}>
@@ -51,7 +59,11 @@ const IntroPage = ({
                 >
                     <Logo size={94} />
                     <GifContainer />
-                    {message}
+                    <div
+                        className={`transition-opacity duration-1000 ${showMessage ? 'opacity-100' : 'opacity-0'}`}
+                    >
+                        {message}
+                    </div>
                     <TapToContinueButton showTapToContinue={canContinue} />
                 </Border>
             </div>
