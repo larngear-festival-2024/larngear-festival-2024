@@ -21,6 +21,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import ChooseColor from '@/components/card/color/ChooseColor';
 import ChooseStamp from '@/components/card/ChooseStamp';
+import { Icon } from '@iconify/react/dist/iconify.js';
 
 export type CardMode = 'sticker' | 'name' | 'share';
 
@@ -47,10 +48,12 @@ export default function Card() {
     const [name, setName] = useState<string>('');
     const [stamps, setStamps] = useState<string[]>(['', '', '', '', '', '']);
 
-    const handleNextPhase = () => {
+    const handleNextPhase = (p: number) => {
         setPhase((prevPhase) => {
             const currentIndex = phases.indexOf(prevPhase);
-            const nextIndex = (currentIndex + 1) % phases.length;
+            if ((currentIndex === 0 && p < 0) || (currentIndex === 3 && p > 0))
+                return phases[currentIndex];
+            const nextIndex = currentIndex + p;
             return phases[nextIndex];
         });
     };
@@ -66,54 +69,65 @@ export default function Card() {
     };
 
     return (
-        <Border>
-            <main className="flex flex-col items-center justify-center gap-9 p-2">
-                {phase === 'share' && <Share stamps={stamps} name={name} />}
+        <section className="grid place-items-center">
+            <button
+                className="absolute left-3 top-3 grid h-12 w-12 place-items-center rounded-full bg-project-dark-blue"
+                onClick={() => handleNextPhase(-1)}
+            >
+                <Icon
+                    icon="akar-icons:arrow-left"
+                    className="text-3xl text-white"
+                />
+            </button>
+            <Border>
+                <main className="flex flex-col items-center justify-center gap-9 p-2">
+                    {phase === 'share' && <Share stamps={stamps} name={name} />}
 
-                {phase !== 'share' && (
-                    <>
-                        <Image
-                            src={Logo}
-                            alt="logo"
-                            width={84.54}
-                            height={94.38}
+                    {phase !== 'share' && (
+                        <>
+                            <Image
+                                src={Logo}
+                                alt="logo"
+                                width={84.54}
+                                height={94.38}
+                            />
+                            <ChooseStamp
+                                stamps={stamps}
+                                setSelected={setSelected}
+                                phase={phase}
+                                selected={selected}
+                            />
+                        </>
+                    )}
+                    {phase === 'name' && (
+                        <Name
+                            name={name}
+                            handleKeyPressed={handleKeyPress}
+                            handleNameChanged={setName}
                         />
-                        <ChooseStamp
-                            stamps={stamps}
-                            setSelected={setSelected}
-                            phase={phase}
+                    )}
+
+                    {phase !== 'share' && <ChooseColor />}
+
+                    {phase === 'sticker' && (
+                        <Sticker
+                            stickers={Stamps}
                             selected={selected}
+                            handleSelected={setSelected}
+                            handleStamps={handleSelectedStamp}
                         />
-                    </>
-                )}
-                {phase === 'name' && (
-                    <Name
-                        name={name}
-                        handleKeyPressed={handleKeyPress}
-                        handleNameChanged={setName}
-                    />
-                )}
+                    )}
 
-                {phase !== 'share' && <ChooseColor />}
-
-                {phase === 'sticker' && (
-                    <Sticker
-                        stickers={Stamps}
-                        selected={selected}
-                        handleSelected={setSelected}
-                        handleStamps={handleSelectedStamp}
-                    />
-                )}
-
-                {phase !== 'share' && (
-                    <button
-                        onClick={handleNextPhase}
-                        className="h-12 w-64 rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white"
-                    >
-                        ไปกันต่อ!
-                    </button>
-                )}
-            </main>
-        </Border>
+                    {phase !== 'share' && (
+                        <button
+                            onClick={() => handleNextPhase(1)}
+                            className="h-12 w-64 rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white"
+                        >
+                            ไปกันต่อ!
+                        </button>
+                    )}
+                </main>
+            </Border>
+        </section>
     );
 }
