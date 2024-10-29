@@ -44,7 +44,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${bangkok.variable} ${sov.variable} max-w-screen-md font-bangkok antialiased`}
+                className={`${bangkok.variable} ${sov.variable} font-bangkok antialiased`}
             >
                 <div className="mx-auto min-h-dvh max-w-md overflow-hidden">
                     <Background>{children}</Background>
