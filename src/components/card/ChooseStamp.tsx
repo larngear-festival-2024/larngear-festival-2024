@@ -16,7 +16,7 @@ export default function ChooseStamp(props: ChooseStampProps) {
     const { stamps, selected, phase, setSelected } = props;
 
     return (
-        <section className="relative h-[192px] w-full max-w-[300px]">
+        <section className="relative h-[195.39px] w-full max-w-[300px]">
             <Image
                 src={BG}
                 alt="background"
