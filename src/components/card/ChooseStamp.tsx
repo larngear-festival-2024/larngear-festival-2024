@@ -3,6 +3,7 @@
 import BG from '@public/card/bg.svg';
 import Image from 'next/image';
 import { CardMode } from '@/app/card/page';
+import { cn } from '@/lib/utils';
 const rotations = [-15, 0, 15, -15, 0, 15];
 
 interface ChooseStampProps {
@@ -29,7 +30,10 @@ export default function ChooseStamp(props: ChooseStampProps) {
                 {stamps.map((Stamp, index) => (
                     <div
                         key={index}
-                        className={`grid place-items-center ${selected === index && phase === 'sticker' ? 'animate-pulse border-2 border-purple-500' : ''}`}
+                        className={cn('grid place-items-center', {
+                            'animate-pulse border-2 border-purple-500':
+                                selected == index && phase === 'sticker',
+                        })}
                         onClick={() => setSelected?.(index)}
                     >
                         {Stamp !== '' && (

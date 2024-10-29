@@ -14,7 +14,7 @@ const TapToContinueButton: React.FC<TapToContinueButtonProps> = ({
     return (
         <div
             className={cn(
-                'invisible flex w-full animate-fade-in-bounce items-center justify-end space-x-1',
+                'invisible·flex·w-full·animate-fade-in-bounce items-center justify-end space-x-1',
                 {
                     visible: showTapToContinue,
                 }
