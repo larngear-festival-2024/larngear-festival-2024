@@ -31,7 +31,7 @@ export default function Share(props: ShareProps) {
                 </section>
                 <ChooseStamp stamps={stamps} />
             </main>
-            <div className="absolute bottom-[2.2%] grid w-[88vw] place-content-center bg-white p-4">
+            <div className="grid w-[350px] translate-y-2 place-content-center bg-white p-4">
                 <button className="h-12 w-64 rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white">
                     แชร์ผลลัพธ์!
                 </button>

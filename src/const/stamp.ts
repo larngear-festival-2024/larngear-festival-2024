@@ -11,7 +11,7 @@ import Stamp10 from '@public/card/stamp10.svg';
 import Stamp11 from '@public/card/stamp11.svg';
 import Stamp12 from '@public/card/stamp12.svg';
 import Stamp13 from '@public/card/stamp13.svg';
-import Nope from '@public/card/nope.svg';
+import Nope from '@public/card/none.svg';
 
 const STAMPS = [
     Nope,

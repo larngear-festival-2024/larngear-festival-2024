@@ -42,7 +42,7 @@ export default function Card() {
     };
 
     return (
-        <section className="grid place-items-center">
+        <section className="mx-auto max-w-[358px]">
             <button
                 className="absolute left-3 top-3 grid h-12 w-12 place-items-center rounded-full bg-project-dark-blue"
                 onClick={() => handleNextPhase(-1)}
