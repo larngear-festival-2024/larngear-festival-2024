@@ -32,7 +32,9 @@ export default function Sticker(props: StickerProps) {
                 {stickers.map((Stamp, index) => (
                     <div
                         key={Stamp}
-                        onClick={() => handleStamps(selected ?? 0, Stamp)}
+                        onClick={() =>
+                            handleStamps(selected ?? 0, index ? Stamp : '')
+                        }
                         className="grid place-items-center"
                     >
                         <Image
