@@ -32,8 +32,8 @@ const sov = localFont({
 });
 
 export const metadata: Metadata = {
-    title: 'Larngear festival 2024',
-    description: '',
+    title: 'LG festival 2024',
+    description: 'Larngear festival 2024, Chulalongkorn university',
 };
 
 export default function RootLayout({
