@@ -1,5 +1,5 @@
-import React from 'react';
 import IntroPage from '@/components/intro';
+import IntroGif from '@public/intro/intro-3.gif';
 
 const Intro3Page = () => {
     return (
@@ -11,6 +11,7 @@ const Intro3Page = () => {
                     <p>กลับหายไป!!!</p>
                 </div>
             }
+            imgUrl={IntroGif}
             previousPage="/intro-2"
             nextPage="/intro-4"
         />

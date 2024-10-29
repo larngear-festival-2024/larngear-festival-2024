@@ -12,9 +12,11 @@ import { ChevronLeft } from 'lucide-react';
 import GifContainer from '@/components/intro/GifContainer';
 import TapToContinueButton from '@/components/intro/TapToContinueButton';
 import { useRouter } from 'next/navigation';
+import { StaticImageData } from 'next/image';
 
 interface IntroPageProps extends ComponentPropsWithoutRef<'section'> {
     message: ReactNode;
+    imgUrl?: StaticImageData;
     nextPage: string;
     previousPage: string;
 }
@@ -22,6 +24,7 @@ interface IntroPageProps extends ComponentPropsWithoutRef<'section'> {
 const IntroPage = ({
     className,
     message,
+    imgUrl,
     nextPage,
     previousPage,
 }: IntroPageProps) => {
@@ -55,7 +58,7 @@ const IntroPage = ({
             <div onClick={() => router.push(nextPage)}>
                 <Border className="flex flex-col items-center space-y-16 p-8">
                     <Logo size={94} />
-                    <GifContainer />
+                    <GifContainer imageUrl={imgUrl} />
                     <div
                         className={`transition-opacity duration-1000 ${showMessage ? 'opacity-100' : 'opacity-0'}`}
                     >

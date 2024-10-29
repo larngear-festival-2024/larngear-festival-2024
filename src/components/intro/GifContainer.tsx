@@ -1,16 +1,16 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 interface GifContainerProps extends ComponentPropsWithoutRef<'figure'> {
-    imageUrl?: string;
+    imageUrl?: StaticImageData;
 }
 
 const GifContainer: React.FC<GifContainerProps> = ({ imageUrl, className }) => {
     return (
         <figure
             className={cn(
-                'flex h-64 w-64 items-center justify-center bg-white',
+                'flex h-64 w-64 items-center justify-center border-4 border-white bg-white shadow-lg',
                 className
             )}
         >
