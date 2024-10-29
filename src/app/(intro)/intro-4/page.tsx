@@ -11,7 +11,7 @@ const Intro4Page = () => {
                 </div>
             }
             previousPage="/intro-3"
-            nextPage="/game-1"
+            nextPage="/card"
         />
     );
 };
