@@ -1,4 +1,5 @@
 import IntroPage from '@/components/intro';
+import IntroGif from '@public/intro/intro-1.gif';
 const Intro1Page = () => {
     return (
         <IntroPage
@@ -9,6 +10,7 @@ const Intro1Page = () => {
                     <p>อย่างเร่งรีบ</p>
                 </div>
             }
+            imgUrl={IntroGif}
             nextPage="/intro-2"
             previousPage="/"
         />
