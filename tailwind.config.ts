@@ -66,8 +66,20 @@ const config: Config = {
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)',
             },
+            keyframes: {
+                'fade-in-bounce': {
+                    '0%': { opacity: '0', transform: 'translateY(0)' },
+                    '50%': { opacity: '1', transform: 'translateY(-10px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+            },
+            animation: {
+                'fade-in-bounce':
+                    'fade-in-bounce 1s ease-in-out forwards, bounce 1s infinite',
+            },
         },
     },
     plugins: [require('tailwindcss-animate')],
 };
+
 export default config;
