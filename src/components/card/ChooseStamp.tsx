@@ -22,7 +22,7 @@ export default function ChooseStamp(props: ChooseStampProps) {
                 src={BG}
                 alt="background"
                 layout="fill"
-                objectFit="cover"
+                objectFit="fit"
                 className="absolute left-0 top-0"
             />
 

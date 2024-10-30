@@ -1,7 +1,9 @@
 import { cn } from '@/lib/utils';
+import { StaticImageData } from 'next/image';
 
 interface BgColor {
     color: string;
+    border: StaticImageData;
     handler: (color: string) => void;
 }
 

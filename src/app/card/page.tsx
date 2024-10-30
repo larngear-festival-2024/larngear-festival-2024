@@ -5,7 +5,7 @@ import Share from '@/components/card/Share';
 import Sticker from '@/components/card/Sticker';
 import Logo from '@public/logo.svg';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import ChooseColor from '@/components/card/color/ChooseColor';
 import ChooseStamp from '@/components/card/ChooseStamp';
 import { Icon } from '@iconify/react/dist/iconify.js';
@@ -20,6 +20,18 @@ export default function Card() {
     const [selected, setSelected] = useState<number | null>(0);
     const [name, setName] = useState<string>('');
     const [stamps, setStamps] = useState<string[]>(['', '', '', '', '', '']);
+    const [backgroundColor, setBackgroundColor] = useState<string>(
+        'bg-project-dark-blue'
+    );
+    const [tapeColor, setTapeColor] = useState<string>('bg-project-yellow');
+
+    const handleSetBackgroundColor = (color: string) => {
+        setBackgroundColor(color);
+    };
+
+    const handleSetTapeColor = (color: string) => {
+        setTapeColor(color);
+    };
 
     const handleNextPhase = (p: number) => {
         setPhase((prevPhase) => {
@@ -42,9 +54,9 @@ export default function Card() {
     };
 
     return (
-        <section className="mx-auto max-w-[358px]">
+        <section className="mx-auto px-4 py-6">
             <button
-                className="absolute left-3 top-3 grid h-12 w-12 place-items-center rounded-full bg-project-dark-blue"
+                className="grid h-10 w-10 place-items-center rounded-full bg-project-dark-blue"
                 onClick={() => handleNextPhase(-1)}
             >
                 <Icon
@@ -52,8 +64,8 @@ export default function Card() {
                     className="text-3xl text-white"
                 />
             </button>
-            <Border>
-                <main className="flex flex-col items-center justify-center gap-9 p-2">
+            <Border className="items-center space-y-16 pb-8">
+                <main className="flex flex-col items-center justify-center gap-9">
                     {phase === 'share' && <Share stamps={stamps} name={name} />}
 
                     {phase !== 'share' && (
