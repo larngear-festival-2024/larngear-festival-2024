@@ -3,13 +3,13 @@ import Border from '@/components/border';
 import Name from '@/components/card/Name';
 import Share from '@/components/card/Share';
 import Sticker from '@/components/card/Sticker';
-import Logo from '@public/logo.svg';
-import Image from 'next/image';
-import React, { use, useState } from 'react';
+import Logo from '@/components/logo';
+import React, { useState } from 'react';
 import ChooseColor from '@/components/card/color/ChooseColor';
 import ChooseStamp from '@/components/card/ChooseStamp';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { STAMPS as Stamps } from '@/const/stamp';
+import { cn } from '@/lib/utils';
 
 export type CardMode = 'sticker' | 'name' | 'share';
 
@@ -43,10 +43,6 @@ export default function Card() {
         });
     };
 
-    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        setName(event.currentTarget.value);
-    };
-
     const handleSelectedStamp = (index: number, sticker: string) => {
         const newStamp = [...stamps];
         newStamp[index] = sticker;
@@ -64,20 +60,19 @@ export default function Card() {
                     className="text-3xl text-white"
                 />
             </button>
-            <Border className="items-center space-y-16 pb-8">
-                <main className="flex flex-col items-center justify-center gap-9">
+            <Border
+                topBorder={backgroundColor}
+                className={cn('items-center space-y-16 pb-8', backgroundColor)}
+            >
+                <main className="flex flex-col items-center justify-center gap-9 px-4">
                     {phase === 'share' && <Share stamps={stamps} name={name} />}
 
                     {phase !== 'share' && (
                         <>
-                            <Image
-                                src={Logo}
-                                alt="logo"
-                                width={84.54}
-                                height={94.38}
-                            />
+                            <Logo size={94} />
                             <ChooseStamp
                                 stamps={stamps}
+                                tapeColor={tapeColor}
                                 setSelected={setSelected}
                                 phase={phase}
                                 selected={selected}
@@ -85,14 +80,21 @@ export default function Card() {
                         </>
                     )}
                     {phase === 'name' && (
-                        <Name
-                            name={name}
-                            handleKeyPressed={handleKeyPress}
-                            handleNameChanged={setName}
-                        />
+                        <Name name={name} handleNameChanged={setName} />
                     )}
 
-                    {phase !== 'share' && <ChooseColor />}
+                    {phase === 'sticker' && (
+                        <ChooseColor
+                            colorState={tapeColor}
+                            handler={handleSetTapeColor}
+                        />
+                    )}
+                    {phase === 'name' && (
+                        <ChooseColor
+                            colorState={backgroundColor}
+                            handler={handleSetBackgroundColor}
+                        />
+                    )}
 
                     {phase === 'sticker' && (
                         <Sticker

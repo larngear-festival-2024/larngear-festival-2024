@@ -1,25 +1,32 @@
 'use client';
 
-import BG from '@public/card/bg.svg';
-import Image from 'next/image';
+import { Tapes } from '@/const/tape';
+import Image, { StaticImageData } from 'next/image';
 import { CardMode } from '@/app/card/page';
 import { cn } from '@/lib/utils';
 const rotations = [-15, 0, 15, -15, 0, 15];
 
 interface ChooseStampProps {
     stamps: string[];
+    tapeColor?: string;
     selected?: number | null;
     phase?: CardMode;
     setSelected?: (n: number) => void;
 }
 
 export default function ChooseStamp(props: ChooseStampProps) {
-    const { stamps, selected, phase, setSelected } = props;
+    const {
+        stamps,
+        tapeColor = 'bg-project-yellow',
+        selected,
+        phase,
+        setSelected,
+    } = props;
 
     return (
         <section className="relative h-[195.39px] w-full max-w-[300px]">
             <Image
-                src={BG}
+                src={Tapes[tapeColor as keyof typeof Tapes]}
                 alt="background"
                 layout="fill"
                 objectFit="fit"

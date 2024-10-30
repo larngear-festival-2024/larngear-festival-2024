@@ -10,7 +10,7 @@ export default function Share(props: ShareProps) {
     const { name, stamps } = props;
 
     return (
-        <section className="flex w-full flex-col items-center gap-6 px-4 pt-4">
+        <section className="flex w-full flex-col items-center gap-6 pt-4">
             <main className="flex w-full flex-col items-center rounded-2xl border-2 border-white pb-8 pt-4 font-sov text-3xl text-white">
                 <section className="grid w-full grid-cols-2">
                     <div className="ml-4 h-full rounded-xl bg-white" />
