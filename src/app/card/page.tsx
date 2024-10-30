@@ -65,7 +65,13 @@ export default function Card() {
                 className={cn('items-center space-y-16 pb-8', backgroundColor)}
             >
                 <main className="flex flex-col items-center justify-center gap-9 px-4">
-                    {phase === 'share' && <Share stamps={stamps} name={name} />}
+                    {phase === 'share' && (
+                        <Share
+                            tapecolor={tapeColor}
+                            stamps={stamps}
+                            name={name}
+                        />
+                    )}
 
                     {phase !== 'share' && (
                         <>
