@@ -1,18 +1,28 @@
 import React, { ReactNode, ComponentPropsWithoutRef } from 'react';
 import './style.css';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import BorderTopSVG from '@public/border-top.svg';
+import { Colors } from '@/const/color';
 
 interface BorderProps extends ComponentPropsWithoutRef<'div'> {
     children: ReactNode;
+    topBorder?: string;
     className?: string;
 }
 
-export default function Border({ children, className }: BorderProps) {
+export default function Border({
+    children,
+    topBorder = 'bg-project-yellow',
+    className,
+}: BorderProps) {
     return (
         <div className="min-h-screen w-full flex-col">
-            <Image src={BorderTopSVG} alt="border-top" className="w-full" />
+            <Image
+                src={Colors[topBorder as keyof typeof Colors]}
+                alt="border-top"
+                className="w-full"
+            />
             <div
                 // -mt-[4px] is magic number to merge border-top and div
                 className={cn(

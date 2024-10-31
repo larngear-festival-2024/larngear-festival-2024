@@ -56,7 +56,7 @@ const IntroPage = ({
             </button>
 
             <div onClick={() => router.push(nextPage)}>
-                <Border className="flex flex-col items-center space-y-16 p-8">
+                <Border className="flex flex-col items-center space-y-16 p-8 pt-0">
                     <Logo size={94} />
                     <GifContainer imageUrl={imgUrl} />
                     <div
