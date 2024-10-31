@@ -2,7 +2,6 @@ import React, { ReactNode, ComponentPropsWithoutRef } from 'react';
 import './style.css';
 import { cn } from '@/lib/utils';
 import Image, { StaticImageData } from 'next/image';
-import BorderTopSVG from '@public/border-top.svg';
 import { Colors } from '@/const/color';
 
 interface BorderProps extends ComponentPropsWithoutRef<'div'> {
@@ -13,7 +12,7 @@ interface BorderProps extends ComponentPropsWithoutRef<'div'> {
 
 export default function Border({
     children,
-    topBorder = 'bg-project-yellow',
+    topBorder = 'bg-project-dark-blue',
     className,
 }: BorderProps) {
     return (

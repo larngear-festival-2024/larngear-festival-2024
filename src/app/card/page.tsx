@@ -7,9 +7,11 @@ import Logo from '@/components/logo';
 import React, { useState } from 'react';
 import ChooseColor from '@/components/card/color/ChooseColor';
 import ChooseStamp from '@/components/card/ChooseStamp';
+import BackgroundDefault from '@public/background.svg';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { STAMPS as Stamps } from '@/const/stamp';
 import { cn } from '@/lib/utils';
+import { useToPng } from '@hugocxl/react-to-image';
 
 export type CardMode = 'sticker' | 'name' | 'share';
 
@@ -24,6 +26,35 @@ export default function Card() {
         'bg-project-dark-blue'
     );
     const [tapeColor, setTapeColor] = useState<string>('bg-project-yellow');
+
+    const [_, convert, ref] = useToPng<HTMLDivElement>({
+        quality: 1,
+        selector: '#ticket-container',
+        onStart: () => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.add('hidden');
+            });
+        },
+        onSuccess: (dataUrl) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+
+            const link = document.createElement('a');
+            link.download = 'ticket-larngearFestival.png';
+            link.href = dataUrl;
+            link.click();
+        },
+        onError: (error) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            console.error(error);
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+        },
+    });
 
     const handleSetBackgroundColor = (color: string) => {
         setBackgroundColor(color);
@@ -50,9 +81,9 @@ export default function Card() {
     };
 
     return (
-        <section className="mx-auto px-4 py-6">
+        <div className="mx-auto px-4 py-6">
             <button
-                className="grid h-10 w-10 place-items-center rounded-full bg-project-dark-blue"
+                className="to-hide grid h-10 w-10 place-items-center rounded-full bg-project-dark-blue"
                 onClick={() => handleNextPhase(-1)}
             >
                 <Icon
@@ -64,12 +95,17 @@ export default function Card() {
                 topBorder={backgroundColor}
                 className={cn('items-center space-y-16 pb-8', backgroundColor)}
             >
-                <main className="flex flex-col items-center justify-center gap-9 px-4">
+                <main
+                    className="flex flex-col items-center justify-center gap-9 px-4"
+                    id="ticket-container"
+                    ref={ref}
+                >
                     {phase === 'share' && (
                         <Share
                             tapecolor={tapeColor}
                             stamps={stamps}
                             name={name}
+                            handleShare={convert}
                         />
                     )}
 
@@ -121,6 +157,6 @@ export default function Card() {
                     )}
                 </main>
             </Border>
-        </section>
+        </div>
     );
 }
