@@ -96,7 +96,7 @@ export default function Card() {
                 className={cn('items-center space-y-16 pb-8', backgroundColor)}
             >
                 <main
-                    className="gap- flex flex-col items-center justify-center px-4"
+                    className="flex flex-col items-center justify-center gap-6 px-4"
                     id="ticket-container"
                     ref={ref}
                 >
