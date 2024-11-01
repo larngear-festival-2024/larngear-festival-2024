@@ -5,7 +5,7 @@ export const Stamp12 = ({ index }: { index: number }) => {
         <svg
             style={{
                 padding: `0.${(index + 6) % 6}rem`,
-                transform: `translate(${(index - 2) % 2}5%, ${(index - 2) % 2}5%) rotate(${rotations[index]}deg)`,
+                transform: `translate(${(index - 2) % 2}5%, ${(index - 2) % 2}5%) rotate(${rotations[index - 1]}deg)`,
             }}
             width="191"
             height="192"

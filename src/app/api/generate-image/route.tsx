@@ -15,6 +15,18 @@ import { TapeYellow } from './Tapes/TapeYellow';
 import { TapeDarkBlue } from './Tapes/TapeDarkBlue';
 import { TapePink } from './Tapes/TapePink';
 import { TapeRedOrange } from './Tapes/TapeRedOrange';
+import { Stamp2 } from './Stamps/Stamp2';
+import { Stamp3 } from './Stamps/Stamp3';
+import { Stamp4 } from './Stamps/Stamp4';
+import { Stamp5 } from './Stamps/Stamp5';
+import { Stamp6 } from './Stamps/Stamp6';
+import { Stamp7 } from './Stamps/Stamp7';
+import { Stamp8 } from './Stamps/Stamp8';
+import { Stamp9 } from './Stamps/Stamp9';
+import { Stamp10 } from './Stamps/Stamp10';
+import { Stamp11 } from './Stamps/Stamp11';
+import { Stamp12 } from './Stamps/Stamp12';
+import { Stamp13 } from './Stamps/Stamp13';
 
 export const rotations = [-15, 30, 135, -15, -30, 15];
 
@@ -44,6 +56,7 @@ export async function GET(request: NextRequest) {
             | 'pink'
             | 'red-orange'
             | 'yellow') || 'dark-green';
+
     const slot1 = searchParams.get('slot1') || '0';
     const slot2 = searchParams.get('slot2') || '0';
     const slot3 = searchParams.get('slot3') || '0';
@@ -51,7 +64,6 @@ export async function GET(request: NextRequest) {
     const slot5 = searchParams.get('slot5') || '0';
     const slot6 = searchParams.get('slot6') || '0';
 
-    const stamps = ['', '', '', '', '', ''];
     const backgroundColor = 'bg-project-dark-blue';
 
     const tapeColorMap = {
@@ -63,6 +75,29 @@ export async function GET(request: NextRequest) {
         yellow: TapeYellow,
     };
     const Tape = tapeColorMap[tapeColor];
+
+    const StampMap = {
+        '1': Stamp1,
+        '2': Stamp2,
+        '3': Stamp3,
+        '4': Stamp4,
+        '5': Stamp5,
+        '6': Stamp6,
+        '7': Stamp7,
+        '8': Stamp8,
+        '9': Stamp9,
+        '10': Stamp10,
+        '11': Stamp11,
+        '12': Stamp12,
+        '13': Stamp13,
+    };
+
+    const S1 = StampMap[slot1 as keyof typeof StampMap];
+    const S2 = StampMap[slot2 as keyof typeof StampMap];
+    const S3 = StampMap[slot3 as keyof typeof StampMap];
+    const S4 = StampMap[slot4 as keyof typeof StampMap];
+    const S5 = StampMap[slot5 as keyof typeof StampMap];
+    const S6 = StampMap[slot6 as keyof typeof StampMap];
 
     const BackgroundColorMap = {
         'dark-blue': '#552CB8',
@@ -245,7 +280,6 @@ export async function GET(request: NextRequest) {
                                         left: 0,
                                         width: '100%',
                                         height: '100%',
-                                        color: 'red',
                                     }}
                                 >
                                     <div
@@ -264,7 +298,7 @@ export async function GET(request: NextRequest) {
                                             }}
                                         >
                                             {/* Place Stamp Here #1 */}
-                                            <Stamp1 index={0} />
+                                            <S1 index={1} />
                                         </div>
                                         <div
                                             style={{
@@ -275,19 +309,18 @@ export async function GET(request: NextRequest) {
                                             }}
                                         >
                                             {/* Place Stamp Here #2 */}
-                                            <Stamp1 index={1} />
+                                            <S2 index={2} />
                                         </div>
                                         <div
                                             style={{
                                                 flex: 1,
-                                                backgroundColor: 'red',
                                                 display: 'flex',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #3 */}
-                                            <Stamp1 index={5} />
+                                            <S3 index={3} />
                                         </div>
                                     </div>
                                     <div
@@ -306,19 +339,18 @@ export async function GET(request: NextRequest) {
                                             }}
                                         >
                                             {/* Place Stamp Here #4 */}
-                                            <Stamp1 index={0} />
+                                            <S4 index={4} />
                                         </div>
                                         <div
                                             style={{
                                                 flex: 1,
-                                                backgroundColor: 'red',
                                                 display: 'flex',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #5 */}
-                                            <Stamp1 index={0} />
+                                            <S5 index={5} />
                                         </div>
                                         <div
                                             style={{
@@ -329,7 +361,7 @@ export async function GET(request: NextRequest) {
                                             }}
                                         >
                                             {/* Place Stamp Here #6 */}
-                                            <Stamp1 index={0} />
+                                            <S6 index={6} />
                                         </div>
                                     </div>
                                 </div>
