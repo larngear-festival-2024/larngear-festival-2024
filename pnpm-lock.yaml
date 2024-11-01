@@ -14,6 +14,15 @@ importers:
       '@resvg/resvg-js':
         specifier: ^2.6.2
         version: 2.6.2
+      '@resvg/resvg-js-darwin-x64':
+        specifier: ^2.6.2
+        version: 2.6.2
+      '@resvg/resvg-js-linux-arm64-gnu':
+        specifier: ^2.6.2
+        version: 2.6.2
+      '@resvg/resvg-js-linux-x64-gnu':
+        specifier: ^2.6.2
+        version: 2.6.2
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -275,7 +284,6 @@ packages:
   '@resvg/resvg-js-darwin-x64@2.6.2':
     resolution: {integrity: sha512-GInyZLjgWDfsVT6+SHxQVRwNzV0AuA1uqGsOAW+0th56J7Nh6bHHKXHBWzUrihxMetcFDmQMAX1tZ1fZDYSRsw==}
     engines: {node: '>= 10'}
-    cpu: [x64]
     os: [darwin]
 
   '@resvg/resvg-js-linux-arm-gnueabihf@2.6.2':
@@ -287,7 +295,6 @@ packages:
   '@resvg/resvg-js-linux-arm64-gnu@2.6.2':
     resolution: {integrity: sha512-zc2BlJSim7YR4FZDQ8OUoJg5holYzdiYMeobb9pJuGDidGL9KZUv7SbiD4E8oZogtYY42UZEap7dqkkYuA91pg==}
     engines: {node: '>= 10'}
-    cpu: [arm64]
     os: [linux]
 
   '@resvg/resvg-js-linux-arm64-musl@2.6.2':
@@ -299,7 +306,6 @@ packages:
   '@resvg/resvg-js-linux-x64-gnu@2.6.2':
     resolution: {integrity: sha512-IVUe+ckIerA7xMZ50duAZzwf1U7khQe2E0QpUxu5MBJNao5RqC0zwV/Zm965vw6D3gGFUl7j4m+oJjubBVoftw==}
     engines: {node: '>= 10'}
-    cpu: [x64]
     os: [linux]
 
   '@resvg/resvg-js-linux-x64-musl@2.6.2':
@@ -2164,20 +2170,17 @@ snapshots:
   '@resvg/resvg-js-darwin-arm64@2.6.2':
     optional: true
 
-  '@resvg/resvg-js-darwin-x64@2.6.2':
-    optional: true
+  '@resvg/resvg-js-darwin-x64@2.6.2': {}
 
   '@resvg/resvg-js-linux-arm-gnueabihf@2.6.2':
     optional: true
 
-  '@resvg/resvg-js-linux-arm64-gnu@2.6.2':
-    optional: true
+  '@resvg/resvg-js-linux-arm64-gnu@2.6.2': {}
 
   '@resvg/resvg-js-linux-arm64-musl@2.6.2':
     optional: true
 
-  '@resvg/resvg-js-linux-x64-gnu@2.6.2':
-    optional: true
+  '@resvg/resvg-js-linux-x64-gnu@2.6.2': {}
 
   '@resvg/resvg-js-linux-x64-musl@2.6.2':
     optional: true
