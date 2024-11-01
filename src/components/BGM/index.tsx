@@ -1,9 +1,9 @@
-'use cilent';
+import { envClientSchema } from '@/env/clientEnvSchema';
 import { Howl } from 'howler';
 import { useMemo, useEffect, useState } from 'react';
 
 const sound = new Howl({
-    src: ['/music/ForgetMeNot.mp3'],
+    src: [`${envClientSchema.NEXT_PUBLIC_BASE_URL}/music/ForgetMeNot.mp3`],
     loop: true,
     format: ['mp3'],
     volume: 0.1,
