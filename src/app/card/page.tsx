@@ -7,7 +7,6 @@ import Logo from '@/components/logo';
 import React, { useState } from 'react';
 import ChooseColor from '@/components/card/color/ChooseColor';
 import ChooseStamp from '@/components/card/ChooseStamp';
-import BackgroundDefault from '@public/background.svg';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { STAMPS as Stamps } from '@/const/stamp';
 import { cn } from '@/lib/utils';
@@ -81,7 +80,7 @@ export default function Card() {
     };
 
     return (
-        <div className="mx-auto px-4 py-6">
+        <div className="flex min-h-screen flex-col justify-center px-4 py-6">
             <button
                 className="to-hide grid h-10 w-10 place-items-center rounded-full bg-project-dark-blue"
                 onClick={() => handleNextPhase(-1)}
@@ -96,7 +95,7 @@ export default function Card() {
                 className={cn('items-center space-y-16 pb-8', backgroundColor)}
             >
                 <main
-                    className="flex flex-col items-center justify-center gap-9 px-4"
+                    className="flex flex-col items-center justify-center gap-6 px-4"
                     id="ticket-container"
                     ref={ref}
                 >

@@ -16,7 +16,7 @@ export default function Border({
     className,
 }: BorderProps) {
     return (
-        <div className="min-h-screen w-full flex-col">
+        <div className="flex w-full flex-col items-center justify-center">
             <Image
                 src={Colors[topBorder as keyof typeof Colors]}
                 alt="border-top"
@@ -25,7 +25,7 @@ export default function Border({
             <div
                 // -mt-[4px] is magic number to merge border-top and div
                 className={cn(
-                    '-mt-[4px] min-h-10 w-full border-b-4 border-l-4 border-r-4 border-b-black border-l-black border-r-black bg-project-dark-blue',
+                    '-mt-[1px] min-h-10 w-full border-b-4 border-l-4 border-r-4 border-b-black border-l-black border-r-black bg-project-dark-blue',
                     className
                 )}
             >
