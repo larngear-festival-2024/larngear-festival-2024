@@ -11,12 +11,15 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 import { STAMPS as Stamps } from '@/const/stamp';
 import { cn } from '@/lib/utils';
 import { useToPng } from '@hugocxl/react-to-image';
+import { useRouter } from 'next/navigation';
 
 export type CardMode = 'sticker' | 'name' | 'share';
 
 const phases: CardMode[] = ['sticker', 'name', 'share'];
 
 export default function Card() {
+    const router = useRouter();
+
     const [phase, setPhase] = useState<CardMode>('sticker');
     const [selected, setSelected] = useState<number | null>(0);
     const [name, setName] = useState<string>('');
@@ -26,7 +29,7 @@ export default function Card() {
     );
     const [tapeColor, setTapeColor] = useState<string>('bg-project-yellow');
 
-    const [_, convert, ref] = useToPng<HTMLDivElement>({
+    const [_, convertNormal, ref] = useToPng<HTMLDivElement>({
         quality: 1,
         selector: '#ticket-container',
         onStart: () => {
@@ -55,6 +58,35 @@ export default function Card() {
         },
     });
 
+    const [__, convertTransparent] = useToPng<HTMLDivElement>({
+        quality: 1,
+        selector: '#ticket-transparent-container',
+        onStart: () => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.add('hidden');
+            });
+        },
+        onSuccess: (dataUrl) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+
+            const link = document.createElement('a');
+            link.download = 'ticket-larngearFestival-transparent.png';
+            link.href = dataUrl;
+            link.click();
+        },
+        onError: (error) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            console.error(error);
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+        },
+    });
+
     const handleSetBackgroundColor = (color: string) => {
         setBackgroundColor(color);
     };
@@ -66,6 +98,9 @@ export default function Card() {
     const handleNextPhase = (p: number) => {
         setPhase((prevPhase) => {
             const currentIndex = phases.indexOf(prevPhase);
+            if (name === '' && phases[currentIndex - 1] === 'sticker')
+                return phases[currentIndex - 1];
+            if (name === '' && prevPhase === 'name') return prevPhase;
             if ((currentIndex === 0 && p < 0) || (currentIndex === 3 && p > 0))
                 return phases[currentIndex];
             const nextIndex = currentIndex + p;
@@ -79,32 +114,38 @@ export default function Card() {
         setStamps(newStamp);
     };
 
+    const handleNavigate = (phases: CardMode) => {
+        if (phases === 'sticker') {
+            router.push('/intro-4');
+            return;
+        }
+        handleNextPhase(-1);
+    };
+
     return (
         <div className="flex min-h-screen flex-col justify-center px-4 py-6">
             <button
-                className="to-hide grid h-10 w-10 place-items-center rounded-full bg-project-dark-blue"
-                onClick={() => handleNextPhase(-1)}
+                className="to-hide grid h-10 w-10 place-items-center"
+                onClick={() => handleNavigate(phase)}
             >
                 <Icon
-                    icon="akar-icons:arrow-left"
-                    className="text-3xl text-white"
+                    fontSize={48}
+                    icon="akar-icons:circle-chevron-left-fill"
+                    className="text-project-dark-blue"
                 />
             </button>
             <Border
                 topBorder={backgroundColor}
                 className={cn('items-center space-y-16 pb-8', backgroundColor)}
             >
-                <main
-                    className="flex flex-col items-center justify-center gap-6 px-4"
-                    id="ticket-container"
-                    ref={ref}
-                >
+                <main className="flex flex-col items-center justify-center gap-6 px-4">
                     {phase === 'share' && (
                         <Share
                             tapecolor={tapeColor}
                             stamps={stamps}
                             name={name}
-                            handleShare={convert}
+                            handleShareNormal={convertNormal}
+                            handleShareTransparent={convertTransparent}
                         />
                     )}
 
@@ -149,7 +190,9 @@ export default function Card() {
                     {phase !== 'share' && (
                         <button
                             onClick={() => handleNextPhase(1)}
-                            className="h-12 w-64 rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white"
+                            data-disabled={name === '' && phase === 'name'}
+                            disabled={name === '' && phase === 'name'}
+                            className="h-12 w-64 rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-gray-400 data-[disabled=true]:text-gray-700"
                         >
                             ไปกันต่อ!
                         </button>

@@ -31,7 +31,7 @@ export default function Sticker(props: StickerProps) {
             <section className="grid h-full grid-flow-row auto-rows-[50%] grid-cols-3 gap-y-6 overflow-y-scroll rounded-b-xl">
                 {stickers.map((Stamp, index) => (
                     <div
-                        key={Stamp}
+                        key={`Stamp${index}`}
                         onClick={() =>
                             handleStamps(selected ?? 0, index ? Stamp : '')
                         }

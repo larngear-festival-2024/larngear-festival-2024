@@ -14,6 +14,7 @@ export default function Name(props: NameProps) {
             <input
                 type="text"
                 value={name}
+                required
                 onChange={(e) => handleNameChanged(e.target.value)}
                 className="h-9 w-72 rounded-xl border-2 border-black p-2 text-center text-2xl"
                 placeholder="ชื่อของคุณ"

@@ -6,26 +6,29 @@ import React from 'react';
 
 interface TapToContinueButtonProps {
     showTapToContinue: boolean;
+    handleNextpage: () => void;
 }
 
 const TapToContinueButton: React.FC<TapToContinueButtonProps> = ({
     showTapToContinue,
+    handleNextpage,
 }) => {
     return (
-        <div
+        <button
             className={cn(
                 'invisible flex w-full animate-fade-in-bounce items-center justify-end space-x-1',
                 {
                     visible: showTapToContinue,
                 }
             )}
+            onClick={handleNextpage}
         >
             <div className="flex flex-col items-center font-sov text-base font-normal text-white">
                 <p>Tap to</p>
                 <p>continue</p>
             </div>
             <ChevronRight size={33} color="white" />
-        </div>
+        </button>
     );
 };
 
