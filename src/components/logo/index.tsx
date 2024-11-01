@@ -8,5 +8,5 @@ import logo from '@public/logo.svg';
  */
 
 export default function Logo({ size = 200 }: { size?: number }) {
-    return <Image src={logo} alt="logo" width={size} height={size} />;
+    return <Image src={logo} alt="logo" width={size} className="aspect-auto" />;
 }
