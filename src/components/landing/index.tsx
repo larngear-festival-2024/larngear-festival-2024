@@ -56,20 +56,20 @@ export default function Landing({ until = OPENING_TIME }: { until?: number }) {
     return (
         <div className="flex min-h-screen w-full flex-col items-center justify-between">
             {/* Main */}
-            <div className="mt-[64px] flex h-[709px] w-[347px] flex-grow flex-col items-center justify-start">
+            <div className="flex h-[709px] w-[347px] flex-grow flex-col items-center justify-center">
                 <div className="mt-4 flex justify-center">
-                    <Logo size={230} />
+                    <Logo size={200} />
                 </div>
-                <div className="relative flex h-[211px] w-[307px] flex-col items-center p-[32px]">
+                <div className="relative flex h-[211px] w-[307px] flex-col items-center p-8">
                     <div className="absolute">
-                        <Tape size={300} />
+                        <Tape size={250} />
                     </div>
+                    <Link href="/intro-1" className="z-20">
+                        <Button className="absolute bottom-0 left-8 h-16 w-64 bg-project-dark-blue text-4xl text-white">
+                            เริ่มต้น
+                        </Button>
+                    </Link>
                 </div>
-                <Link href="/intro-1" className="z-20">
-                    <Button className="-mt-[66px] h-[65px] w-[263px] justify-center bg-project-dark-blue text-4xl text-white">
-                        เริ่มต้น
-                    </Button>
-                </Link>
 
                 {/* Timer */}
                 <div className="flex flex-col items-center">

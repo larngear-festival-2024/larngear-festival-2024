@@ -28,9 +28,8 @@ export default function ChooseStamp(props: ChooseStampProps) {
             <Image
                 src={Tapes[tapeColor as keyof typeof Tapes]}
                 alt="background"
-                layout="fill"
-                objectFit="fit"
-                className="absolute left-0 top-0"
+                fill
+                className="absolute left-0 top-0 size-full object-contain"
             />
 
             <div className="z-1 relative grid h-full w-full grid-cols-3 grid-rows-2">

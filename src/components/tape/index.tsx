@@ -8,5 +8,5 @@ import tape from '@public/tape.svg';
  */
 
 export default function Tape({ size = 200 }: { size?: number }) {
-    return <Image src={tape} alt="tape" width={size} height={size} />;
+    return <Image src={tape} alt="tape" width={size} className="aspect-auto" />;
 }

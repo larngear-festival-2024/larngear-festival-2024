@@ -8,7 +8,7 @@ import React, {
 import Border from '@/components/border';
 import Logo from '@/components/logo';
 import { cn } from '@/lib/utils';
-import { ChevronLeft } from 'lucide-react';
+import { Icon } from '@iconify/react';
 import GifContainer from '@/components/intro/GifContainer';
 import TapToContinueButton from '@/components/intro/TapToContinueButton';
 import { useRouter } from 'next/navigation';
@@ -54,23 +54,25 @@ const IntroPage = ({
             )}
         >
             <button onClick={() => router.push(previousPage)}>
-                <ChevronLeft
-                    size={33}
-                    className="rounded-full border-2 border-project-dark-blue bg-project-dark-blue text-white"
+                <Icon
+                    fontSize={48}
+                    icon="akar-icons:circle-chevron-left-fill"
+                    className="-mb-4 text-project-dark-blue"
                 />
             </button>
-            <div onClick={() => router.push(nextPage)}>
-                <Border className="flex flex-col items-center space-y-16 p-8 pt-0">
-                    <Logo size={94} />
-                    <GifContainer imageUrl={imgUrl} />
-                    <div
-                        className={`transition-opacity duration-1000 ${showMessage ? 'opacity-100' : 'opacity-0'}`}
-                    >
-                        {message}
-                    </div>
-                    <TapToContinueButton showTapToContinue={canContinue} />
-                </Border>
-            </div>
+            <Border className="flex flex-col items-center space-y-16 p-8 pt-0">
+                <Logo size={94} />
+                <GifContainer imageUrl={imgUrl} />
+                <div
+                    className={`transition-opacity duration-1000 ${showMessage ? 'opacity-100' : 'opacity-0'}`}
+                >
+                    {message}
+                </div>
+                <TapToContinueButton
+                    handleNextpage={() => router.push(nextPage)}
+                    showTapToContinue={canContinue}
+                />
+            </Border>
         </section>
     );
 };

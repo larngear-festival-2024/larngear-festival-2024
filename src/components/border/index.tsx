@@ -1,8 +1,9 @@
 import React, { ReactNode, ComponentPropsWithoutRef } from 'react';
 import './style.css';
 import { cn } from '@/lib/utils';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { Colors } from '@/const/color';
+import BGM from '@/components/BGM';
 
 interface BorderProps extends ComponentPropsWithoutRef<'div'> {
     children: ReactNode;
@@ -17,6 +18,7 @@ export default function Border({
 }: BorderProps) {
     return (
         <div className="flex w-full flex-col items-center justify-center">
+            <BGM />
             <Image
                 src={Colors[topBorder as keyof typeof Colors]}
                 alt="border-top"
