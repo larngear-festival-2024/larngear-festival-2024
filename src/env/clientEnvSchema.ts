@@ -1,7 +1,7 @@
 import z from 'zod';
 
 const envSchema = z.object({
-    NEXT_PUBLIC_BASE_URL: z.string().url(),
+    NEXT_PUBLIC_BASE_URL: z.string(),
 });
 
 export const envClientSchema = envSchema.parse({
