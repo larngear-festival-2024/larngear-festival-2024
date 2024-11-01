@@ -47,16 +47,20 @@ const IntroPage = ({
         };
     }, []);
     return (
-        <section className={cn('px-4 py-6', className)}>
+        <section
+            className={cn(
+                'flex min-h-screen flex-col justify-center px-4 py-6',
+                className
+            )}
+        >
             <button onClick={() => router.push(previousPage)}>
                 <ChevronLeft
                     size={33}
                     className="rounded-full border-2 border-project-dark-blue bg-project-dark-blue text-white"
                 />
             </button>
-
             <div onClick={() => router.push(nextPage)}>
-                <Border className="flex flex-col items-center space-y-16 p-8">
+                <Border className="flex flex-col items-center space-y-16 p-8 pt-0">
                     <Logo size={94} />
                     <GifContainer imageUrl={imgUrl} />
                     <div

@@ -5,7 +5,7 @@ import BackgroundImg from '@public/background.svg';
 
 export default function Background({ children }: { children: ReactNode }) {
     return (
-        <div className="relative min-h-screen w-full">
+        <div className="relative min-h-screen w-full" id="ticket-container">
             <Image
                 src={BackgroundImg}
                 alt="background"
