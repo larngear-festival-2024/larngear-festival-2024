@@ -28,7 +28,7 @@ export default function Sticker(props: StickerProps) {
                 ))}
             </section>
 
-            <section className="grid h-4/5 grid-flow-row auto-rows-[50%] grid-cols-3 gap-0 overflow-y-scroll rounded-b-xl">
+            <section className="grid h-full grid-flow-row auto-rows-[50%] grid-cols-3 gap-y-6 overflow-y-scroll rounded-b-xl">
                 {stickers.map((Stamp, index) => (
                     <div
                         key={Stamp}
@@ -39,7 +39,7 @@ export default function Sticker(props: StickerProps) {
                     >
                         <Image
                             src={Stamp}
-                            className="h-4/5 w-4/5 overflow-hidden object-contain"
+                            className="h-full w-full overflow-hidden object-contain p-2"
                             alt={`Stamp ${index + 1}`}
                         />
                     </div>

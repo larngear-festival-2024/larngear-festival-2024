@@ -16,7 +16,7 @@ export default function Border({
     className,
 }: BorderProps) {
     return (
-        <div className="min-h-screen w-full flex-col">
+        <div className="flex w-full flex-col items-center justify-center">
             <Image
                 src={Colors[topBorder as keyof typeof Colors]}
                 alt="border-top"

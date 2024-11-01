@@ -12,7 +12,7 @@ export default function Share(props: ShareProps) {
     const { name, tapecolor, stamps, handleShare } = props;
 
     return (
-        <section className="flex w-full flex-col items-center gap-6 pt-4">
+        <section className="flex grid w-full flex-col items-center gap-6 pt-4">
             <main className="flex w-full flex-col items-center rounded-2xl border-2 border-white pb-8 pt-4 font-sov text-3xl text-white">
                 <section className="grid w-full grid-cols-2">
                     <div className="ml-4 h-full rounded-xl bg-white" />
@@ -36,7 +36,7 @@ export default function Share(props: ShareProps) {
                 </section>
                 <ChooseStamp tapeColor={tapecolor} stamps={stamps} />
             </main>
-            <div className="place-content-censter to-hide grid w-full">
+            <div className="to-hide -mb-8 p-4 text-center">
                 <button
                     className="h-12 w-64 rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white"
                     onClick={handleShare}

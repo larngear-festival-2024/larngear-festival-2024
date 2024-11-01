@@ -81,7 +81,7 @@ export default function Card() {
     };
 
     return (
-        <div className="mx-auto px-4 py-6">
+        <div className="flex min-h-screen flex-col justify-center px-4 py-6">
             <button
                 className="to-hide grid h-10 w-10 place-items-center rounded-full bg-project-dark-blue"
                 onClick={() => handleNextPhase(-1)}
@@ -96,7 +96,7 @@ export default function Card() {
                 className={cn('items-center space-y-16 pb-8', backgroundColor)}
             >
                 <main
-                    className="flex flex-col items-center justify-center gap-9 px-4"
+                    className="gap- flex flex-col items-center justify-center px-4"
                     id="ticket-container"
                     ref={ref}
                 >
