@@ -25,7 +25,7 @@ export default function Share(props: ShareProps) {
         >
             <main className="flex w-full flex-col items-center rounded-2xl border-2 border-white pb-8 pt-4 font-sov text-3xl text-white">
                 <section className="grid w-full grid-cols-2">
-                    <div className="ml-4 h-full rounded-xl bg-white" />
+                    <div className="ml-4 rounded-xl bg-white" />
                     <div className="grid place-items-center">
                         <Image alt={Logo} src={Logo} width={105} height={118} />
                         <hr className="mt-2 w-full border-2 border-white" />
