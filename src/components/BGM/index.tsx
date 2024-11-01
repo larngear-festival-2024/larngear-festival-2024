@@ -1,9 +1,9 @@
-'use cilent';
+import { envClientSchema } from '@/env/clientEnvSchema';
 import { Howl } from 'howler';
 import { useMemo, useEffect, useState } from 'react';
 
 const sound = new Howl({
-    src: ['/music/ForgetMeNot.mp3'],
+    src: [`${envClientSchema.NEXT_PUBLIC_BASE_URL}/music/ForgetMeNot.mp3`],
     loop: true,
     format: ['mp3'],
     volume: 0.1,
@@ -28,11 +28,18 @@ const BGM = () => {
 
     useEffect(() => {
         if (isPlaying) {
-            if (window.location.pathname === '/') sound.stop();
+            if (
+                window.location.pathname ===
+                `${envClientSchema.NEXT_PUBLIC_BASE_URL}`
+            )
+                sound.stop();
         } else {
             if (
-                window.location.pathname.startsWith('/intro') ||
-                window.location.pathname === '/card'
+                window.location.pathname.startsWith(
+                    `${envClientSchema.NEXT_PUBLIC_BASE_URL}/intro`
+                ) ||
+                window.location.pathname ===
+                    `${envClientSchema.NEXT_PUBLIC_BASE_URL}/card`
             )
                 sound.play();
         }
