@@ -5,10 +5,11 @@ interface ShareProps {
     name: string;
     tapecolor: string;
     stamps: string[];
+    handleShare: () => void;
 }
 
 export default function Share(props: ShareProps) {
-    const { name, tapecolor, stamps } = props;
+    const { name, tapecolor, stamps, handleShare } = props;
 
     return (
         <section className="flex w-full flex-col items-center gap-6 pt-4">
@@ -35,8 +36,11 @@ export default function Share(props: ShareProps) {
                 </section>
                 <ChooseStamp tapeColor={tapecolor} stamps={stamps} />
             </main>
-            <div className="grid w-full place-content-center">
-                <button className="h-12 w-64 rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white">
+            <div className="place-content-censter to-hide grid w-full">
+                <button
+                    className="h-12 w-64 rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white"
+                    onClick={handleShare}
+                >
                     แชร์ผลลัพธ์!
                 </button>
             </div>
