@@ -4,7 +4,7 @@ import { Tapes } from '@/const/tape';
 import Image, { StaticImageData } from 'next/image';
 import { CardMode } from '@/app/card/page';
 import { cn } from '@/lib/utils';
-const rotations = [-15, 0, 15, -15, 0, 15];
+const rotations = [-15, 30, 135, -15, -30, 15];
 
 interface ChooseStampProps {
     stamps: string[];
@@ -49,7 +49,8 @@ export default function ChooseStamp(props: ChooseStampProps) {
                                 className="h-4/5 w-4/5 overflow-hidden object-contain"
                                 alt={`Stamp ${index + 1}`}
                                 style={{
-                                    transform: `rotate(${rotations[index]}deg)`,
+                                    padding: `0.${(index + 6) % 6}rem`,
+                                    transform: `translate(${(index - 2) % 2}5%, ${(index - 2) % 2}5%) rotate(${rotations[index]}deg)`,
                                 }}
                             />
                         )}

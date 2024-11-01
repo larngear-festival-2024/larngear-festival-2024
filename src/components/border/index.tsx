@@ -25,7 +25,7 @@ export default function Border({
             <div
                 // -mt-[4px] is magic number to merge border-top and div
                 className={cn(
-                    '-mt-[4px] min-h-10 w-full border-b-4 border-l-4 border-r-4 border-b-black border-l-black border-r-black bg-project-dark-blue',
+                    '-mt-[1px] min-h-10 w-full border-b-4 border-l-4 border-r-4 border-b-black border-l-black border-r-black bg-project-dark-blue',
                     className
                 )}
             >

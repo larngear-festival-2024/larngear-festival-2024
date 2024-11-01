@@ -7,7 +7,6 @@ import Logo from '@/components/logo';
 import React, { useState } from 'react';
 import ChooseColor from '@/components/card/color/ChooseColor';
 import ChooseStamp from '@/components/card/ChooseStamp';
-import BackgroundDefault from '@public/background.svg';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { STAMPS as Stamps } from '@/const/stamp';
 import { cn } from '@/lib/utils';
