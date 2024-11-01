@@ -128,7 +128,7 @@ export async function GET(request: NextRequest) {
                     width: 420,
                 }}
             >
-                <BorderTop />
+                <BorderTop color={BackgroundColorMap[ticketColor]} />
                 <div
                     style={{
                         display: 'flex',
