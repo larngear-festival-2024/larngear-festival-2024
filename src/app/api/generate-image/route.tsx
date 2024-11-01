@@ -2,45 +2,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { type NextRequest } from 'next/server';
 import sharp from 'sharp';
-import Stamp1 from '@public/card/stamp1.svg';
-import Stamp2 from '@public/card/stamp2.svg';
-import Stamp3 from '@public/card/stamp3.svg';
-import Stamp4 from '@public/card/stamp4.svg';
-import Stamp5 from '@public/card/stamp5.svg';
-import Stamp6 from '@public/card/stamp6.svg';
-import Stamp7 from '@public/card/stamp7.svg';
-import Stamp8 from '@public/card/stamp8.svg';
-import Stamp9 from '@public/card/stamp9.svg';
-import Stamp10 from '@public/card/stamp10.svg';
-import Stamp11 from '@public/card/stamp11.svg';
-import Stamp12 from '@public/card/stamp12.svg';
-import Stamp13 from '@public/card/stamp13.svg';
-import None from '@public/card/none.svg';
 import satori from 'satori';
-import { Colors } from '@/const/color';
-import { Tapes } from '@/const/tape';
-import { cn } from '@/lib/utils';
-import BackgroundImg from '@public/background.svg';
 import path from 'path';
 import fs from 'fs';
+import { BackgroundImage } from './Background';
+import { BorderTop } from './BorderTop';
+import { Logo } from './Logo';
+import { TapeDarkGreen } from './Tapes/TapeDarkGreen';
+import { Stamp1 } from './Stamps/Stamp1';
+import { TapeLightBlue } from './Tapes/TapeLightBlue';
+import { TapeYellow } from './Tapes/TapeYellow';
+import { TapeDarkBlue } from './Tapes/TapeDarkBlue';
+import { TapePink } from './Tapes/TapePink';
+import { TapeRedOrange } from './Tapes/TapeRedOrange';
 
-const stampsMap = {
-    '1': Stamp1,
-    '2': Stamp2,
-    '3': Stamp3,
-    '4': Stamp4,
-    '5': Stamp5,
-    '6': Stamp6,
-    '7': Stamp7,
-    '8': Stamp8,
-    '9': Stamp9,
-    '10': Stamp10,
-    '11': Stamp11,
-    '12': Stamp12,
-    '13': Stamp13,
-    '0': None,
-};
-const rotations = [-15, 30, 135, -15, -30, 15];
+export const rotations = [-15, 30, 135, -15, -30, 15];
 
 export async function GET(request: NextRequest) {
     const sovRegular = path.join(
@@ -52,8 +28,22 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
 
     const name = searchParams.get('name') || 'John Doe';
-    const ticketColor = searchParams.get('ticketColor') || 'pink';
-    const caseColor = searchParams.get('caseColor') || 'dark-green';
+    const ticketColor =
+        (searchParams.get('ticketColor') as
+            | 'dark-blue'
+            | 'dark-green'
+            | 'light-blue'
+            | 'pink'
+            | 'red-orange'
+            | 'yellow') || 'pink';
+    const tapeColor =
+        (searchParams.get('tapeColor') as
+            | 'dark-blue'
+            | 'dark-green'
+            | 'light-blue'
+            | 'pink'
+            | 'red-orange'
+            | 'yellow') || 'dark-green';
     const slot1 = searchParams.get('slot1') || '0';
     const slot2 = searchParams.get('slot2') || '0';
     const slot3 = searchParams.get('slot3') || '0';
@@ -61,19 +51,293 @@ export async function GET(request: NextRequest) {
     const slot5 = searchParams.get('slot5') || '0';
     const slot6 = searchParams.get('slot6') || '0';
 
-    const stamps = [Stamp1.src, Stamp2.src, Stamp3.src, Stamp2.src, '', ''];
+    const stamps = ['', '', '', '', '', ''];
     const backgroundColor = 'bg-project-dark-blue';
-    const tapeColor = 'bg-project-dark-green';
+
+    const tapeColorMap = {
+        'dark-blue': TapeDarkBlue,
+        'dark-green': TapeDarkGreen,
+        'light-blue': TapeLightBlue,
+        pink: TapePink,
+        'red-orange': TapeRedOrange,
+        yellow: TapeYellow,
+    };
+    const Tape = tapeColorMap[tapeColor];
+
+    const BackgroundColorMap = {
+        'dark-blue': '#552CB8',
+        'dark-green': '#009A5E',
+        'light-blue': '#048CD6',
+        pink: '#FC7DA8',
+        'red-orange': '#FF5A47',
+        yellow: '#FFD011',
+    };
 
     const svg = await satori(
         <div
             style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
                 width: '540px',
                 height: '960px',
                 backgroundColor: 'red',
             }}
         >
-            dasd
+            <BackgroundImage />
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 420,
+                }}
+            >
+                <BorderTop />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                        backgroundColor: BackgroundColorMap[ticketColor],
+                        borderLeft: '4px solid black',
+                        borderRight: '4px solid black',
+                        borderBottom: '4px solid black',
+                        height: 680,
+                        padding: 16,
+                    }}
+                >
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: '2px solid white',
+                            borderRadius: 16,
+                            height: 620,
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: 'flex',
+                                paddingLeft: 16,
+                                paddingTop: 16,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    flex: 1,
+                                    backgroundColor: 'white',
+                                    height: 230,
+                                    borderRadius: 12,
+                                }}
+                            ></div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    flex: 1,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        paddingBottom: 8,
+                                    }}
+                                >
+                                    <Logo />
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        backgroundColor: 'white',
+                                        height: 4,
+                                        width: '100%',
+                                    }}
+                                ></div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        fontSize: 36,
+                                        color: 'white',
+                                        lineHeight: 1.2,
+                                        paddingTop: 2,
+                                    }}
+                                >
+                                    <div>16:30</div>
+                                    <div>ONWARD</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                fontSize: 64,
+                                color: 'white',
+                                lineHeight: 1,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'flex-end',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <div>7</div>
+                                <div
+                                    style={{
+                                        fontSize: 24,
+                                        paddingBottom: 16,
+                                    }}
+                                >
+                                    TH
+                                </div>
+                                <div
+                                    style={{
+                                        marginLeft: 16,
+                                    }}
+                                >
+                                    NOVEMBER
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            style={{
+                                backgroundColor: 'white',
+                                color: '#552CB8',
+                                fontSize: 36,
+                                lineHeight: 1,
+                                paddingTop: 8,
+                                paddingBottom: 8,
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            {name}
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                paddingTop: 20,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    position: 'relative',
+                                }}
+                            >
+                                <Tape />
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        width: '100%',
+                                        height: '100%',
+                                        color: 'red',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            flex: 1,
+                                            display: 'flex',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #1 */}
+                                            <Stamp1 index={0} />
+                                        </div>
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #2 */}
+                                            <Stamp1 index={1} />
+                                        </div>
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                backgroundColor: 'red',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #3 */}
+                                            <Stamp1 index={5} />
+                                        </div>
+                                    </div>
+                                    <div
+                                        style={{
+                                            flex: 1,
+                                            display: 'flex',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #4 */}
+                                            <Stamp1 index={0} />
+                                        </div>
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                backgroundColor: 'red',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #5 */}
+                                            <Stamp1 index={0} />
+                                        </div>
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #6 */}
+                                            <Stamp1 index={0} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>,
         {
             width: 540,
