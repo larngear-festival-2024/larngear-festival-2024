@@ -32,6 +32,8 @@ import { Stamp13 } from './Stamps/Stamp13';
 // export const translateX = [-10, 30, 0, -20, -20, 20];
 // export const translateY = [-10, -20, 0, -10, 20, 20];
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
     const sovRegular = path.join(
         process.cwd(),
