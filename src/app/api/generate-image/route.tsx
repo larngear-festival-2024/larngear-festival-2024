@@ -28,13 +28,7 @@ import { Stamp11 } from './Stamps/Stamp11';
 import { Stamp12 } from './Stamps/Stamp12';
 import { Stamp13 } from './Stamps/Stamp13';
 
-// export const rotations = [-15, 10, 20, -40, -10, 10];
-// export const translateX = [-10, 30, 0, -20, -20, 20];
-// export const translateY = [-10, -20, 0, -10, 20, 20];
-
-export const dynamic = 'force-dynamic';
-
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
     const sovRegular = path.join(
         process.cwd(),
         'src/app/fonts/sov/regular.ttf'
@@ -47,11 +41,11 @@ export async function GET(request: NextRequest) {
     const heightLocked = [49, 55, 60, 84, 65, 50];
 
     const sovRegularArrayBuffer = fs.readFileSync(sovRegular).buffer;
-    const searchParams = request.nextUrl.searchParams;
+    const body = await request.json();
 
-    const name = searchParams.get('name') || 'John Doe';
+    const name = body.name || 'John Doe';
     const ticketColor =
-        (searchParams.get('ticketColor') as
+        (body.ticketColor as
             | 'bg-project-dark-blue'
             | 'bg-project-dark-green'
             | 'bg-project-light-blue'
@@ -59,7 +53,7 @@ export async function GET(request: NextRequest) {
             | 'bg-project-red-orange'
             | 'bg-project-yellow') || 'bg-project-dark-blue';
     const tapeColor =
-        (searchParams.get('tapeColor') as
+        (body.tapeColor as
             | 'bg-project-dark-blue'
             | 'bg-project-dark-green'
             | 'bg-project-light-blue'
@@ -67,12 +61,12 @@ export async function GET(request: NextRequest) {
             | 'bg-project-red-orange'
             | 'bg-project-yellow') || 'bg-project-yellow';
 
-    const slot1 = searchParams.get('slot1') || '0';
-    const slot2 = searchParams.get('slot2') || '0';
-    const slot3 = searchParams.get('slot3') || '0';
-    const slot4 = searchParams.get('slot4') || '0';
-    const slot5 = searchParams.get('slot5') || '0';
-    const slot6 = searchParams.get('slot6') || '0';
+    const slot1 = body.slot1 || '0';
+    const slot2 = body.slot2 || '0';
+    const slot3 = body.slot3 || '0';
+    const slot4 = body.slot4 || '0';
+    const slot5 = body.slot5 || '0';
+    const slot6 = body.slot6 || '0';
 
     const backgroundColor = 'bg-project-dark-blue';
 
