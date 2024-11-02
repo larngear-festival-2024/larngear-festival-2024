@@ -1,22 +1,17 @@
 import Image from 'next/image';
 import Logo from '@public/logo.svg';
 import ChooseStamp from './ChooseStamp';
+import { envClientSchema } from '@/env/clientEnvSchema';
+
 interface ShareProps {
     name: string;
     tapecolor: string;
-    stamps: string[];
-    handleShareNormal: () => void;
-    handleShareTransparent: () => void;
+    backgroundcolor: string;
+    stamps: number[];
 }
 
 export default function Share(props: ShareProps) {
-    const {
-        name,
-        tapecolor,
-        stamps,
-        handleShareNormal,
-        handleShareTransparent,
-    } = props;
+    const { name, tapecolor, stamps, backgroundcolor } = props;
 
     return (
         <section
@@ -42,23 +37,18 @@ export default function Share(props: ShareProps) {
                     </h1>
                 </section>
                 <section className="mb-8 grid w-full place-items-center bg-white py-1 text-4xl text-project-dark-blue">
-                    {name.slice(0, 20)}
+                    {name.slice(0, 16)}
                 </section>
                 <ChooseStamp tapeColor={tapecolor} stamps={stamps} />
             </main>
-            <div className="to-hide -mb-8 grid grid-cols-2 gap-x-3 p-4 text-center">
-                <button
-                    className="h-12 w-full rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white"
-                    onClick={handleShareNormal}
+            <div className="to-hide -mb-8 grid gap-x-3 p-4 text-center">
+                <a
+                    href={`${envClientSchema.NEXT_PUBLIC_BASE_URL}/api/generate-image?name=${name.slice(0, 16)}&ticketColor=${backgroundcolor}&tapeColor=${tapecolor}&slot1=${stamps[0]}&slot2=${stamps[1]}&slot3=${stamps[2]}&slot4=${stamps[3]}&slot5=${stamps[4]}&slot6=${stamps[5]}`}
                 >
-                    แชร์ทั้งหมด!
-                </button>
-                <button
-                    className="h-12 w-full rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white"
-                    onClick={handleShareTransparent}
-                >
-                    แชร์กรอบ!
-                </button>
+                    <button className="h-12 w-full rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white">
+                        แชร์เลย!
+                    </button>
+                </a>
             </div>
         </section>
     );
