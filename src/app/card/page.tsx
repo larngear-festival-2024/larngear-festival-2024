@@ -29,7 +29,7 @@ export default function Card() {
     );
     const [tapeColor, setTapeColor] = useState<string>('bg-project-yellow');
 
-    const [_, convertNormal, ref] = useToPng<HTMLDivElement>({
+    const [_, convertNormal] = useToPng<HTMLDivElement>({
         quality: 1,
         selector: '#ticket-container',
         onStart: () => {
@@ -87,12 +87,65 @@ export default function Card() {
         },
     });
 
+    const [___, convertNormal2] = useToPng<HTMLDivElement>({
+        quality: 1,
+        selector: '#ticket-container',
+        onStart: () => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.add('hidden');
+            });
+        },
+        onSuccess: (dataUrl) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+        },
+        onError: (error) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            console.error(error);
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+        },
+    });
+
+    const [____, convertTransparent2] = useToPng<HTMLDivElement>({
+        quality: 1,
+        selector: '#ticket-transparent-container',
+        onStart: () => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.add('hidden');
+            });
+        },
+        onSuccess: (dataUrl) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+        },
+        onError: (error) => {
+            const toHide = document.querySelectorAll('.to-hide');
+            console.error(error);
+            toHide.forEach((el) => {
+                el.classList.remove('hidden');
+            });
+        },
+    });
+
     const handleSetBackgroundColor = (color: string) => {
         setBackgroundColor(color);
     };
 
     const handleSetTapeColor = (color: string) => {
         setTapeColor(color);
+    };
+
+    const handleDummy = () => {
+        convertNormal2();
+        convertTransparent2();
     };
 
     const handleNextPhase = (p: number) => {
@@ -146,6 +199,7 @@ export default function Card() {
                             name={name}
                             handleShareNormal={convertNormal}
                             handleShareTransparent={convertTransparent}
+                            handleDummy={handleDummy}
                         />
                     )}
 

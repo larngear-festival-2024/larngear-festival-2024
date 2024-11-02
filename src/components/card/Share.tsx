@@ -8,6 +8,7 @@ interface ShareProps {
     stamps: string[];
     handleShareNormal: () => void;
     handleShareTransparent: () => void;
+    handleDummy: () => void;
 }
 
 export default function Share(props: ShareProps) {
@@ -16,7 +17,9 @@ export default function Share(props: ShareProps) {
     useEffect(() => {
         const ShareTimer = setTimeout(() => {
             setShareEnable(true);
-        }, 4000);
+        }, 1000);
+
+        props.handleDummy();
 
         return () => {
             clearTimeout(ShareTimer);
