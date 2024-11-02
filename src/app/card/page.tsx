@@ -37,12 +37,21 @@ export default function Card() {
             toHide.forEach((el) => {
                 el.classList.add('hidden');
             });
+            const background = document.querySelector('#ticket-container');
+            if (background) {
+                (background as HTMLDivElement).style.width = '448px';
+            }
         },
         onSuccess: (dataUrl) => {
             const toHide = document.querySelectorAll('.to-hide');
             toHide.forEach((el) => {
                 el.classList.remove('hidden');
             });
+
+            const background = document.querySelector('#ticket-container');
+            if (background) {
+                (background as HTMLDivElement).style.removeProperty('width');
+            }
 
             const link = document.createElement('a');
             link.download = 'ticket-larngearFestival.png';
@@ -66,12 +75,21 @@ export default function Card() {
             toHide.forEach((el) => {
                 el.classList.add('hidden');
             });
+            const background = document.querySelector('#ticket-container');
+            if (background) {
+                (background as HTMLDivElement).style.width = '448px';
+            }
         },
         onSuccess: (dataUrl) => {
             const toHide = document.querySelectorAll('.to-hide');
             toHide.forEach((el) => {
                 el.classList.remove('hidden');
             });
+
+            const background = document.querySelector('#ticket-container');
+            if (background) {
+                (background as HTMLDivElement).style.removeProperty('width');
+            }
 
             const link = document.createElement('a');
             link.download = 'ticket-larngearFestival-transparent.png';
