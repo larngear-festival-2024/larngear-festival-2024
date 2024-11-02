@@ -1,15 +1,7 @@
-import { rotations, translateX, translateY } from '../route';
-
-export const Stamp12 = ({ index }: { index: number }) => {
+export const Stamp13 = ({ heightLocked }: { heightLocked: number }) => {
     return (
         <svg
-            style={{
-                position: 'absolute',
-                width: '70%',
-                height: '70%',
-                padding: `0.${Math.abs(3 - 2) * 3}rem`,
-                transform: `translate(${translateX[index]}%, ${translateY[index]}%) rotate(${rotations[index]}deg)`,
-            }}
+            height={heightLocked}
             viewBox="0 0 40 83"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

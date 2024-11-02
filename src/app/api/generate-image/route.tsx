@@ -28,9 +28,9 @@ import { Stamp11 } from './Stamps/Stamp11';
 import { Stamp12 } from './Stamps/Stamp12';
 import { Stamp13 } from './Stamps/Stamp13';
 
-export const rotations = [-15, 10, 20, -40, -10, 10];
-export const translateX = [-10, 30, 0, -20, -20, 20];
-export const translateY = [-10, -20, 0, -10, 20, 20];
+// export const rotations = [-15, 10, 20, -40, -10, 10];
+// export const translateX = [-10, 30, 0, -20, -20, 20];
+// export const translateY = [-10, -20, 0, -10, 20, 20];
 
 export async function GET(request: NextRequest) {
     const sovRegular = path.join(
@@ -39,8 +39,10 @@ export async function GET(request: NextRequest) {
     );
 
     const rotations = [-15, 10, 20, -40, -10, 10];
-    const translateX = [-10, 30, 0, -20, -20, 20];
-    const translateY = [-10, -20, 0, -10, 20, 20];
+    const translateX = [-10, 30, 0, -15, -20, 20];
+    const translateY = [-10, -15, 0, -10, 20, 20];
+
+    const heightLocked = [49, 55, 60, 84, 65, 50];
 
     const sovRegularArrayBuffer = fs.readFileSync(sovRegular).buffer;
     const searchParams = request.nextUrl.searchParams;
@@ -297,59 +299,48 @@ export async function GET(request: NextRequest) {
                                     >
                                         <div
                                             style={{
-                                                backgroundColor: 'red',
                                                 flex: 1,
                                                 display: 'flex',
                                                 position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
+                                                transform: `translate(${translateX[0]}%, ${translateY[0]}%) rotate(${rotations[0]}deg)`,
                                             }}
                                         >
                                             {/* Place Stamp Here #1 */}
-                                            {/* <div
-                                                style={{
-                                                    display: 'flex',
-                                                    position: 'absolute',
-                                                    width: '100%',
-                                                    height: '100%',
-                                                }}
-                                            > */}
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    height: '70%',
-                                                    width: '70%',
-                                                }}
-                                            >
-                                                <S1 index={0} />
-                                            </div>
-                                            {/* </div> */}
+                                            <S1
+                                                heightLocked={heightLocked[0]}
+                                            />
                                         </div>
                                         <div
                                             style={{
-                                                backgroundColor: 'white',
                                                 flex: 1,
                                                 display: 'flex',
                                                 position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
+                                                transform: `translate(${translateX[1]}%, ${translateY[1]}%) rotate(${rotations[1]}deg)`,
                                             }}
                                         >
                                             {/* Place Stamp Here #2 */}
-                                            <S2 index={1} />
+                                            <S2
+                                                heightLocked={heightLocked[1]}
+                                            />
                                         </div>
                                         <div
                                             style={{
-                                                backgroundColor: 'blue',
                                                 flex: 1,
                                                 display: 'flex',
                                                 position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
+                                                transform: `translate(${translateX[2]}%, ${translateY[2]}%) rotate(${rotations[2]}deg)`,
                                             }}
                                         >
                                             {/* Place Stamp Here #3 */}
-                                            <S3 index={2} />
+                                            <S3
+                                                heightLocked={heightLocked[2]}
+                                            />
                                         </div>
                                     </div>
                                     <div
@@ -362,41 +353,47 @@ export async function GET(request: NextRequest) {
                                         <div
                                             style={{
                                                 flex: 1,
-                                                backgroundColor: 'green',
                                                 display: 'flex',
                                                 position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
+                                                transform: `translate(${translateX[3]}%, ${translateY[3]}%) rotate(${rotations[3]}deg)`,
                                             }}
                                         >
                                             {/* Place Stamp Here #4 */}
-                                            <S4 index={3} />
+                                            <S4
+                                                heightLocked={heightLocked[3]}
+                                            />
                                         </div>
                                         <div
                                             style={{
                                                 flex: 1,
-                                                backgroundColor: 'yellow',
                                                 display: 'flex',
                                                 position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
+                                                transform: `translate(${translateX[4]}%, ${translateY[4]}%) rotate(${rotations[4]}deg)`,
                                             }}
                                         >
                                             {/* Place Stamp Here #5 */}
-                                            <S5 index={4} />
+                                            <S5
+                                                heightLocked={heightLocked[4]}
+                                            />
                                         </div>
                                         <div
                                             style={{
                                                 flex: 1,
-                                                backgroundColor: 'pink',
                                                 display: 'flex',
                                                 position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
+                                                transform: `translate(${translateX[5]}%, ${translateY[5]}%) rotate(${rotations[5]}deg)`,
                                             }}
                                         >
                                             {/* Place Stamp Here #6 */}
-                                            <S6 index={5} />
+                                            <S6
+                                                heightLocked={heightLocked[5]}
+                                            />
                                         </div>
                                     </div>
                                 </div>
