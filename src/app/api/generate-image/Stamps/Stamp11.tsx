@@ -1,29 +1,34 @@
-import { rotations } from '../route';
+import { rotations, translateX, translateY } from '../route';
 
 export const Stamp11 = ({ index }: { index: number }) => {
     return (
         <svg
+            // style={{
+            //     padding: `0.${Math.abs(3 - index) * 3}5rem`,
+            //     transform: `translate(${translateX[index]}%, ${translateY[index]}%) rotate(${rotations[index]}deg)`,
+            // }}
             style={{
-                padding: `0.${(index + 6) % 6}rem`,
-                transform: `translate(${(index - 2) % 2}5%, ${(index - 2) % 2}5%) rotate(${rotations[index - 1]}deg)`,
+                position: 'absolute',
+                width: '70%',
+                height: '70%',
+                padding: `0.${Math.abs(3 - 2) * 3}rem`,
+                transform: `translate(${translateX[index]}%, ${translateY[index]}%) rotate(${rotations[index]}deg)`,
             }}
-            width="199"
-            height="204"
-            viewBox="0 0 199 204"
+            viewBox="0 0 81 82"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
-                d="M38.9672 3.05654C-6.53298 -0.113863 2.61809 70.6804 8.50005 188C32 103 88.6086 148.672 131 100C158 69.0001 107.765 30.4915 81.0002 62.5001C86.3734 43.3963 84.4673 6.22694 38.9672 3.05654Z"
+                d="M15.9256 1.04322C-2.43968 -0.236457 1.25398 28.3383 3.62813 75.6922C13.1135 41.3835 35.9625 59.818 53.073 40.1727C63.9711 27.6601 43.6946 12.1168 32.8915 25.0365C35.0603 17.3256 34.2909 2.32289 15.9256 1.04322Z"
                 fill="#FC7DA8"
                 stroke="black"
-                stroke-width="4"
+                stroke-width="1.61453"
             />
             <path
-                d="M178.593 169.656C184.192 187.358 132.233 198.156 108.711 201.531C124.655 190.269 116.584 164.076 130.029 141.566C141.6 122.192 160.302 144.409 150.268 158.058C157.27 154.107 172.995 151.954 178.593 169.656Z"
+                d="M72.2832 68.2881C74.5431 75.4332 53.5707 79.7914 44.0764 81.1536C50.5121 76.6082 47.2542 66.0357 52.6809 56.9499C57.3515 49.1302 64.9002 58.0975 60.8501 63.6067C63.6766 62.0119 70.0234 61.1429 72.2832 68.2881Z"
                 fill="#FC7DA8"
                 stroke="black"
-                stroke-width="4"
+                stroke-width="1.61453"
             />
         </svg>
     );

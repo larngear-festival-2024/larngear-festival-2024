@@ -1,47 +1,58 @@
-import { rotations } from '../route';
+import { rotations, translateX, translateY } from '../route';
 
 export const Stamp9 = ({ index }: { index: number }) => {
     return (
         <svg
+            // style={{
+            //     padding: `0.${Math.abs(3 - index) * 3}5rem`,
+            //     transform: `translate(${translateX[index]}%, ${translateY[index]}%) rotate(${rotations[index]}deg)`,
+            // }}
             style={{
-                padding: `0.${(index + 6) % 6}rem`,
-                transform: `translate(${(index - 2) % 2}5%, ${(index - 2) % 2}5%) rotate(${rotations[index - 1]}deg)`,
+                position: 'absolute',
+                width: '70%',
+                height: '70%',
+                padding: `0.${Math.abs(3 - 2) * 3}rem`,
+                transform: `translate(${translateX[index]}%, ${translateY[index]}%) rotate(${rotations[index]}deg)`,
             }}
-            width="222"
-            height="222"
-            viewBox="0 0 222 222"
+            viewBox="0 0 91 90"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
             <circle
-                cx="110.904"
-                cy="110.904"
-                r="106.904"
+                cx="45.5518"
+                cy="45.1338"
+                r="43.1497"
                 fill="#3A3939"
                 stroke="black"
-                stroke-width="8"
+                stroke-width="3.22905"
             />
             <circle
-                cx="110.904"
-                cy="110.903"
-                r="87.9053"
+                cx="45.5518"
+                cy="45.1336"
+                r="35.4814"
                 fill="#3A3939"
                 stroke="black"
-                stroke-width="4"
+                stroke-width="1.61453"
             />
             <path
                 opacity="0.2"
-                d="M135.228 125.303C147.261 104.128 130.601 84.7834 114.488 84.0664L126.687 26.8924C194 40.5 210.5 112 184.5 155.5L135.228 125.303Z"
+                d="M55.37 50.9457C60.227 42.3989 53.5022 34.5908 46.9984 34.3014L51.9226 11.2242C79.0922 16.7166 85.7521 45.5763 75.2577 63.1343L55.37 50.9457Z"
                 fill="#D9D9D9"
             />
-            <ellipse cx="111" cy="110.5" rx="35" ry="34.5" fill="#FC7DA8" />
+            <ellipse
+                cx="46.0165"
+                cy="45.3968"
+                rx="14.1271"
+                ry="13.9253"
+                fill="#FC7DA8"
+            />
             <circle
-                cx="111.012"
-                cy="111.012"
-                r="10.9469"
+                cx="45.5954"
+                cy="45.1776"
+                r="4.41851"
                 fill="#D9D9D9"
                 stroke="black"
-                stroke-width="4"
+                stroke-width="1.61453"
             />
         </svg>
     );

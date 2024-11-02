@@ -28,7 +28,9 @@ import { Stamp11 } from './Stamps/Stamp11';
 import { Stamp12 } from './Stamps/Stamp12';
 import { Stamp13 } from './Stamps/Stamp13';
 
-export const rotations = [-15, 30, 135, -15, -30, 15];
+export const rotations = [-15, 10, 20, -40, -10, 10];
+export const translateX = [-10, 30, 0, -20, -20, 20];
+export const translateY = [-10, -20, 0, -10, 20, 20];
 
 export async function GET(request: NextRequest) {
     const sovRegular = path.join(
@@ -36,26 +38,30 @@ export async function GET(request: NextRequest) {
         'src/app/fonts/sov/regular.ttf'
     );
 
+    const rotations = [-15, 10, 20, -40, -10, 10];
+    const translateX = [-10, 30, 0, -20, -20, 20];
+    const translateY = [-10, -20, 0, -10, 20, 20];
+
     const sovRegularArrayBuffer = fs.readFileSync(sovRegular).buffer;
     const searchParams = request.nextUrl.searchParams;
 
     const name = searchParams.get('name') || 'John Doe';
     const ticketColor =
         (searchParams.get('ticketColor') as
-            | 'dark-blue'
-            | 'dark-green'
-            | 'light-blue'
-            | 'pink'
-            | 'red-orange'
-            | 'yellow') || 'pink';
+            | 'bg-project-dark-blue'
+            | 'bg-project-dark-green'
+            | 'bg-project-light-blue'
+            | 'bg-project-pink'
+            | 'bg-project-red-orange'
+            | 'bg-project-yellow') || 'bg-project-dark-blue';
     const tapeColor =
         (searchParams.get('tapeColor') as
-            | 'dark-blue'
-            | 'dark-green'
-            | 'light-blue'
-            | 'pink'
-            | 'red-orange'
-            | 'yellow') || 'dark-green';
+            | 'bg-project-dark-blue'
+            | 'bg-project-dark-green'
+            | 'bg-project-light-blue'
+            | 'bg-project-pink'
+            | 'bg-project-red-orange'
+            | 'bg-project-yellow') || 'bg-project-yellow';
 
     const slot1 = searchParams.get('slot1') || '0';
     const slot2 = searchParams.get('slot2') || '0';
@@ -67,12 +73,12 @@ export async function GET(request: NextRequest) {
     const backgroundColor = 'bg-project-dark-blue';
 
     const tapeColorMap = {
-        'dark-blue': TapeDarkBlue,
-        'dark-green': TapeDarkGreen,
-        'light-blue': TapeLightBlue,
-        pink: TapePink,
-        'red-orange': TapeRedOrange,
-        yellow: TapeYellow,
+        'bg-project-dark-blue': TapeDarkBlue,
+        'bg-project-dark-green': TapeDarkGreen,
+        'bg-project-light-blue': TapeLightBlue,
+        'bg-project-pink': TapePink,
+        'bg-project-red-orange': TapeRedOrange,
+        'bg-project-yellow': TapeYellow,
     };
     const Tape = tapeColorMap[tapeColor];
 
@@ -100,12 +106,12 @@ export async function GET(request: NextRequest) {
     const S6 = StampMap[slot6 as keyof typeof StampMap];
 
     const BackgroundColorMap = {
-        'dark-blue': '#552CB8',
-        'dark-green': '#009A5E',
-        'light-blue': '#048CD6',
-        pink: '#FC7DA8',
-        'red-orange': '#FF5A47',
-        yellow: '#FFD011',
+        'bg-project-dark-blue': '#552CB8',
+        'bg-project-dark-green': '#009A5E',
+        'bg-project-light-blue': '#048CD6',
+        'bg-project-pink': '#FC7DA8',
+        'bg-project-red-orange': '#FF5A47',
+        'bg-project-yellow': '#FFD011',
     };
 
     const svg = await satori(
@@ -291,36 +297,59 @@ export async function GET(request: NextRequest) {
                                     >
                                         <div
                                             style={{
+                                                backgroundColor: 'red',
                                                 flex: 1,
                                                 display: 'flex',
+                                                position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #1 */}
-                                            <S1 index={1} />
+                                            {/* <div
+                                                style={{
+                                                    display: 'flex',
+                                                    position: 'absolute',
+                                                    width: '100%',
+                                                    height: '100%',
+                                                }}
+                                            > */}
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    height: '70%',
+                                                    width: '70%',
+                                                }}
+                                            >
+                                                <S1 index={0} />
+                                            </div>
+                                            {/* </div> */}
                                         </div>
                                         <div
                                             style={{
+                                                backgroundColor: 'white',
                                                 flex: 1,
                                                 display: 'flex',
+                                                position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #2 */}
-                                            <S2 index={2} />
+                                            <S2 index={1} />
                                         </div>
                                         <div
                                             style={{
+                                                backgroundColor: 'blue',
                                                 flex: 1,
                                                 display: 'flex',
+                                                position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #3 */}
-                                            <S3 index={3} />
+                                            <S3 index={2} />
                                         </div>
                                     </div>
                                     <div
@@ -333,35 +362,41 @@ export async function GET(request: NextRequest) {
                                         <div
                                             style={{
                                                 flex: 1,
+                                                backgroundColor: 'green',
                                                 display: 'flex',
+                                                position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #4 */}
-                                            <S4 index={4} />
+                                            <S4 index={3} />
                                         </div>
                                         <div
                                             style={{
                                                 flex: 1,
+                                                backgroundColor: 'yellow',
                                                 display: 'flex',
+                                                position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #5 */}
-                                            <S5 index={5} />
+                                            <S5 index={4} />
                                         </div>
                                         <div
                                             style={{
                                                 flex: 1,
+                                                backgroundColor: 'pink',
                                                 display: 'flex',
+                                                position: 'relative',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                             }}
                                         >
                                             {/* Place Stamp Here #6 */}
-                                            <S6 index={6} />
+                                            <S6 index={5} />
                                         </div>
                                     </div>
                                 </div>
@@ -390,8 +425,7 @@ export async function GET(request: NextRequest) {
     return new Response(png, {
         headers: {
             'Content-Type': 'image/png',
-            'Content-Disposition':
-                'attachment; filename=larngearfest-2024-eiei.png',
+            'Content-Disposition': 'attachment; filename=larngearfest-2024.png',
         },
     });
 }

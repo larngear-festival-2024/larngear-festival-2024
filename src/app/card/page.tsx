@@ -10,7 +10,6 @@ import ChooseStamp from '@/components/card/ChooseStamp';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { STAMPS as Stamps } from '@/const/stamp';
 import { cn } from '@/lib/utils';
-import { useToPng } from '@hugocxl/react-to-image';
 import { useRouter } from 'next/navigation';
 
 export type CardMode = 'sticker' | 'name' | 'share';
@@ -23,69 +22,11 @@ export default function Card() {
     const [phase, setPhase] = useState<CardMode>('sticker');
     const [selected, setSelected] = useState<number | null>(0);
     const [name, setName] = useState<string>('');
-    const [stamps, setStamps] = useState<string[]>(['', '', '', '', '', '']);
+    const [stamps, setStamps] = useState<number[]>([0, 0, 0, 0, 0, 0]);
     const [backgroundColor, setBackgroundColor] = useState<string>(
         'bg-project-dark-blue'
     );
     const [tapeColor, setTapeColor] = useState<string>('bg-project-yellow');
-
-    const [_, convertNormal, ref] = useToPng<HTMLDivElement>({
-        quality: 1,
-        selector: '#ticket-container',
-        onStart: () => {
-            const toHide = document.querySelectorAll('.to-hide');
-            toHide.forEach((el) => {
-                el.classList.add('hidden');
-            });
-        },
-        onSuccess: (dataUrl) => {
-            const toHide = document.querySelectorAll('.to-hide');
-            toHide.forEach((el) => {
-                el.classList.remove('hidden');
-            });
-
-            const link = document.createElement('a');
-            link.download = 'ticket-larngearFestival.png';
-            link.href = dataUrl;
-            link.click();
-        },
-        onError: (error) => {
-            const toHide = document.querySelectorAll('.to-hide');
-            console.error(error);
-            toHide.forEach((el) => {
-                el.classList.remove('hidden');
-            });
-        },
-    });
-
-    const [__, convertTransparent] = useToPng<HTMLDivElement>({
-        quality: 1,
-        selector: '#ticket-transparent-container',
-        onStart: () => {
-            const toHide = document.querySelectorAll('.to-hide');
-            toHide.forEach((el) => {
-                el.classList.add('hidden');
-            });
-        },
-        onSuccess: (dataUrl) => {
-            const toHide = document.querySelectorAll('.to-hide');
-            toHide.forEach((el) => {
-                el.classList.remove('hidden');
-            });
-
-            const link = document.createElement('a');
-            link.download = 'ticket-larngearFestival-transparent.png';
-            link.href = dataUrl;
-            link.click();
-        },
-        onError: (error) => {
-            const toHide = document.querySelectorAll('.to-hide');
-            console.error(error);
-            toHide.forEach((el) => {
-                el.classList.remove('hidden');
-            });
-        },
-    });
 
     const handleSetBackgroundColor = (color: string) => {
         setBackgroundColor(color);
@@ -108,9 +49,9 @@ export default function Card() {
         });
     };
 
-    const handleSelectedStamp = (index: number, sticker: string) => {
+    const handleSelectedStamp = (index: number, indexSticker: number) => {
         const newStamp = [...stamps];
-        newStamp[index] = sticker;
+        newStamp[index] = indexSticker;
         setStamps(newStamp);
     };
 
@@ -142,10 +83,9 @@ export default function Card() {
                     {phase === 'share' && (
                         <Share
                             tapecolor={tapeColor}
+                            backgroundcolor={backgroundColor}
                             stamps={stamps}
                             name={name}
-                            handleShareNormal={convertNormal}
-                            handleShareTransparent={convertTransparent}
                         />
                     )}
 
