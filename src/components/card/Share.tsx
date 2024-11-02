@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Logo from '@public/logo.svg';
 import ChooseStamp from './ChooseStamp';
+import { useState, useEffect } from 'react';
 interface ShareProps {
     name: string;
     tapecolor: string;
@@ -10,6 +11,18 @@ interface ShareProps {
 }
 
 export default function Share(props: ShareProps) {
+    const [shareEnable, setShareEnable] = useState<boolean>(false);
+
+    useEffect(() => {
+        const ShareTimer = setTimeout(() => {
+            setShareEnable(true);
+        }, 4000);
+
+        return () => {
+            clearTimeout(ShareTimer);
+        };
+    }, []);
+
     const {
         name,
         tapecolor,
@@ -46,19 +59,31 @@ export default function Share(props: ShareProps) {
                 </section>
                 <ChooseStamp tapeColor={tapecolor} stamps={stamps} />
             </main>
-            <div className="to-hide -mb-8 grid grid-cols-2 gap-x-3 p-4 text-center">
-                <button
-                    className="h-12 w-full rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white"
-                    onClick={handleShareNormal}
-                >
-                    แชร์ทั้งหมด!
-                </button>
-                <button
-                    className="h-12 w-full rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white"
-                    onClick={handleShareTransparent}
-                >
-                    แชร์กรอบ!
-                </button>
+            <div className="to-hide -mb-8 p-4 text-center">
+                {shareEnable ? (
+                    <div className="grid grid-cols-2 gap-x-3">
+                        <button
+                            className="h-12 w-full rounded-lg border-2 border-black bg-project-red-orange text-3xl text-white"
+                            onClick={handleShareNormal}
+                        >
+                            แชร์ทั้งหมด!
+                        </button>
+                        <button
+                            className="h-12 w-full rounded-lg border-2 border-black bg-project-light-blue text-3xl text-white"
+                            onClick={handleShareTransparent}
+                        >
+                            แชร์กรอบ!
+                        </button>
+                        <p className="col-span-2 p-2 text-white underline">
+                            หมายเหตุ: หากภาพที่โหลดไปว่างเปล่า
+                            กรุณารอสักครู่แล้วโหลดใหม่อีกครั้ง
+                        </p>
+                    </div>
+                ) : (
+                    <p className="col-span-2 animate-pulse text-2xl text-white">
+                        กำลังโหลด...
+                    </p>
+                )}
             </div>
         </section>
     );
