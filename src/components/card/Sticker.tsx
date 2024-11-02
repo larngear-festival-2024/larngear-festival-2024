@@ -3,7 +3,7 @@ import Image from 'next/image';
 interface StickerProps {
     stickers: string[];
     selected: number | null;
-    handleStamps: (i: number, stamp: string) => void;
+    handleStamps: (i: number, stamp: number) => void;
     handleSelected: (i: number) => void;
 }
 
@@ -32,9 +32,7 @@ export default function Sticker(props: StickerProps) {
                 {stickers.map((Stamp, index) => (
                     <div
                         key={`Stamp${index}`}
-                        onClick={() =>
-                            handleStamps(selected ?? 0, index ? Stamp : '')
-                        }
+                        onClick={() => handleStamps(selected ?? 0, index)}
                         className="grid place-items-center"
                     >
                         <Image

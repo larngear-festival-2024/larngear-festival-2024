@@ -1,52 +1,70 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { type NextRequest } from 'next/server';
-import { Resvg } from '@resvg/resvg-js';
-import Stamp1 from '@public/card/stamp1.svg';
-import Stamp2 from '@public/card/stamp2.svg';
-import Stamp3 from '@public/card/stamp3.svg';
-import Stamp4 from '@public/card/stamp4.svg';
-import Stamp5 from '@public/card/stamp5.svg';
-import Stamp6 from '@public/card/stamp6.svg';
-import Stamp7 from '@public/card/stamp7.svg';
-import Stamp8 from '@public/card/stamp8.svg';
-import Stamp9 from '@public/card/stamp9.svg';
-import Stamp10 from '@public/card/stamp10.svg';
-import Stamp11 from '@public/card/stamp11.svg';
-import Stamp12 from '@public/card/stamp12.svg';
-import Stamp13 from '@public/card/stamp13.svg';
-import None from '@public/card/none.svg';
+import sharp from 'sharp';
 import satori from 'satori';
-import { Colors } from '@/const/color';
-import { Tapes } from '@/const/tape';
-import { cn } from '@/lib/utils';
-import BackgroundImg from '@public/background.svg';
-import Logo from '@public/logo.svg';
+import path from 'path';
+import fs from 'fs';
+import { BackgroundImage } from './Background';
+import { BorderTop } from './BorderTop';
+import { Logo } from './Logo';
+import { TapeDarkGreen } from './Tapes/TapeDarkGreen';
+import { Stamp1 } from './Stamps/Stamp1';
+import { TapeLightBlue } from './Tapes/TapeLightBlue';
+import { TapeYellow } from './Tapes/TapeYellow';
+import { TapeDarkBlue } from './Tapes/TapeDarkBlue';
+import { TapePink } from './Tapes/TapePink';
+import { TapeRedOrange } from './Tapes/TapeRedOrange';
+import { Stamp2 } from './Stamps/Stamp2';
+import { Stamp3 } from './Stamps/Stamp3';
+import { Stamp4 } from './Stamps/Stamp4';
+import { Stamp5 } from './Stamps/Stamp5';
+import { Stamp6 } from './Stamps/Stamp6';
+import { Stamp7 } from './Stamps/Stamp7';
+import { Stamp8 } from './Stamps/Stamp8';
+import { Stamp9 } from './Stamps/Stamp9';
+import { Stamp10 } from './Stamps/Stamp10';
+import { Stamp11 } from './Stamps/Stamp11';
+import { Stamp12 } from './Stamps/Stamp12';
+import { Stamp13 } from './Stamps/Stamp13';
 
-const stampsMap = {
-    '1': Stamp1,
-    '2': Stamp2,
-    '3': Stamp3,
-    '4': Stamp4,
-    '5': Stamp5,
-    '6': Stamp6,
-    '7': Stamp7,
-    '8': Stamp8,
-    '9': Stamp9,
-    '10': Stamp10,
-    '11': Stamp11,
-    '12': Stamp12,
-    '13': Stamp13,
-    '0': None,
-};
-const rotations = [-15, 30, 135, -15, -30, 15];
+// export const rotations = [-15, 10, 20, -40, -10, 10];
+// export const translateX = [-10, 30, 0, -20, -20, 20];
+// export const translateY = [-10, -20, 0, -10, 20, 20];
 
 export async function GET(request: NextRequest) {
+    const sovRegular = path.join(
+        process.cwd(),
+        'src/app/fonts/sov/regular.ttf'
+    );
+
+    const rotations = [-15, 10, 20, -40, -10, 10];
+    const translateX = [-10, 30, 0, -15, -20, 20];
+    const translateY = [-10, -15, 0, -10, 20, 20];
+
+    const heightLocked = [49, 55, 60, 84, 65, 50];
+
+    const sovRegularArrayBuffer = fs.readFileSync(sovRegular).buffer;
     const searchParams = request.nextUrl.searchParams;
 
     const name = searchParams.get('name') || 'John Doe';
-    const ticketColor = searchParams.get('ticketColor') || 'pink';
-    const caseColor = searchParams.get('caseColor') || 'dark-green';
+    const ticketColor =
+        (searchParams.get('ticketColor') as
+            | 'bg-project-dark-blue'
+            | 'bg-project-dark-green'
+            | 'bg-project-light-blue'
+            | 'bg-project-pink'
+            | 'bg-project-red-orange'
+            | 'bg-project-yellow') || 'bg-project-dark-blue';
+    const tapeColor =
+        (searchParams.get('tapeColor') as
+            | 'bg-project-dark-blue'
+            | 'bg-project-dark-green'
+            | 'bg-project-light-blue'
+            | 'bg-project-pink'
+            | 'bg-project-red-orange'
+            | 'bg-project-yellow') || 'bg-project-yellow';
+
     const slot1 = searchParams.get('slot1') || '0';
     const slot2 = searchParams.get('slot2') || '0';
     const slot3 = searchParams.get('slot3') || '0';
@@ -54,97 +72,333 @@ export async function GET(request: NextRequest) {
     const slot5 = searchParams.get('slot5') || '0';
     const slot6 = searchParams.get('slot6') || '0';
 
-    const stamps = [Stamp1.src, Stamp2.src, Stamp3.src, Stamp2.src, '', ''];
     const backgroundColor = 'bg-project-dark-blue';
-    const tapeColor = 'bg-project-dark-green';
+
+    const tapeColorMap = {
+        'bg-project-dark-blue': TapeDarkBlue,
+        'bg-project-dark-green': TapeDarkGreen,
+        'bg-project-light-blue': TapeLightBlue,
+        'bg-project-pink': TapePink,
+        'bg-project-red-orange': TapeRedOrange,
+        'bg-project-yellow': TapeYellow,
+    };
+    const Tape = tapeColorMap[tapeColor];
+
+    const StampMap = {
+        '1': Stamp1,
+        '2': Stamp2,
+        '3': Stamp3,
+        '4': Stamp4,
+        '5': Stamp5,
+        '6': Stamp6,
+        '7': Stamp7,
+        '8': Stamp8,
+        '9': Stamp9,
+        '10': Stamp10,
+        '11': Stamp11,
+        '12': Stamp12,
+        '13': Stamp13,
+    };
+
+    const S1 = StampMap[slot1 as keyof typeof StampMap];
+    const S2 = StampMap[slot2 as keyof typeof StampMap];
+    const S3 = StampMap[slot3 as keyof typeof StampMap];
+    const S4 = StampMap[slot4 as keyof typeof StampMap];
+    const S5 = StampMap[slot5 as keyof typeof StampMap];
+    const S6 = StampMap[slot6 as keyof typeof StampMap];
+
+    const BackgroundColorMap = {
+        'bg-project-dark-blue': '#552CB8',
+        'bg-project-dark-green': '#009A5E',
+        'bg-project-light-blue': '#048CD6',
+        'bg-project-pink': '#FC7DA8',
+        'bg-project-red-orange': '#FF5A47',
+        'bg-project-yellow': '#FFD011',
+    };
 
     const svg = await satori(
         <div
-            className="fixed left-0 top-0 flex h-[960px] w-[540px] items-center justify-center bg-cover bg-no-repeat"
             style={{
-                backgroundImage: `url(${BackgroundImg.src})`,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                width: '540px',
+                height: '960px',
+                backgroundColor: 'red',
             }}
         >
-            <div className="flex h-[1400px] w-[420px] flex-col justify-center px-4 py-6">
-                <div className="flex w-full flex-col items-center justify-center">
-                    <img
-                        src={Colors[backgroundColor as keyof typeof Colors].src}
-                        alt="border-top"
-                        className="w-full"
-                    />
+            <BackgroundImage />
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: 420,
+                }}
+            >
+                <BorderTop color={BackgroundColorMap[ticketColor]} />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                        backgroundColor: BackgroundColorMap[ticketColor],
+                        borderLeft: '4px solid black',
+                        borderRight: '4px solid black',
+                        borderBottom: '4px solid black',
+                        height: 680,
+                        padding: 16,
+                    }}
+                >
                     <div
-                        className={cn(
-                            '-mt-[1px] min-h-10 w-full items-center space-y-16 border-b-4 border-l-4 border-r-4 border-b-black border-l-black border-r-black bg-project-dark-blue pb-8',
-                            backgroundColor
-                        )}
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: '2px solid white',
+                            borderRadius: 16,
+                            height: 620,
+                        }}
                     >
-                        <main className="flex flex-col items-center justify-center gap-6 px-4">
-                            <section
-                                className="grid w-full flex-col items-center gap-6 pt-4"
-                                id="ticket-transparent-container"
+                        <div
+                            style={{
+                                display: 'flex',
+                                paddingLeft: 16,
+                                paddingTop: 16,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    flex: 1,
+                                    backgroundColor: 'white',
+                                    height: 230,
+                                    borderRadius: 12,
+                                }}
+                            ></div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    flex: 1,
+                                }}
                             >
-                                <main className="flex w-full flex-col items-center rounded-2xl border-2 border-white pb-8 pt-4 font-sov text-3xl text-white">
-                                    <section className="grid w-full grid-cols-2">
-                                        <div className="ml-4 h-full rounded-xl bg-white" />
-                                        <div className="grid place-items-center">
-                                            <img
-                                                src={Logo.src}
-                                                className="h-[118px] w-[105px]"
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        paddingBottom: 8,
+                                    }}
+                                >
+                                    <Logo />
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        backgroundColor: 'white',
+                                        height: 4,
+                                        width: '100%',
+                                    }}
+                                ></div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        fontSize: 36,
+                                        color: 'white',
+                                        lineHeight: 1.2,
+                                        paddingTop: 2,
+                                    }}
+                                >
+                                    <div>16:30</div>
+                                    <div>ONWARD</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                fontSize: 64,
+                                color: 'white',
+                                lineHeight: 1,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'flex-end',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <div>7</div>
+                                <div
+                                    style={{
+                                        fontSize: 24,
+                                        paddingBottom: 16,
+                                    }}
+                                >
+                                    TH
+                                </div>
+                                <div
+                                    style={{
+                                        marginLeft: 16,
+                                    }}
+                                >
+                                    NOVEMBER
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            style={{
+                                backgroundColor: 'white',
+                                color: '#552CB8',
+                                fontSize: 36,
+                                lineHeight: 1,
+                                paddingTop: 8,
+                                paddingBottom: 8,
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            {name}
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                paddingTop: 20,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    position: 'relative',
+                                }}
+                            >
+                                <Tape />
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        width: '100%',
+                                        height: '100%',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            flex: 1,
+                                            display: 'flex',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                position: 'relative',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                transform: `translate(${translateX[0]}%, ${translateY[0]}%) rotate(${rotations[0]}deg)`,
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #1 */}
+                                            <S1
+                                                heightLocked={heightLocked[0]}
                                             />
-                                            <hr className="mt-2 w-full border-2 border-white" />
-                                            <h1 className="text-center text-4xl">
-                                                16:30
-                                                <br />
-                                                onward
-                                            </h1>
                                         </div>
-                                    </section>
-                                    <section>
-                                        <h1 className="text-6xl">
-                                            7<span className="text-lg">th</span>{' '}
-                                            November
-                                        </h1>
-                                    </section>
-                                    <section className="mb-8 grid w-full place-items-center bg-white py-1 text-4xl text-project-dark-blue">
-                                        {name}
-                                    </section>
-                                    <section className="relative h-[195.39px] w-full max-w-[300px]">
-                                        <img
-                                            src={
-                                                Tapes[
-                                                    tapeColor as keyof typeof Tapes
-                                                ].src
-                                            }
-                                            alt="background"
-                                            className="absolute left-0 top-0 size-full object-contain"
-                                        />
-
-                                        <div className="z-1 relative grid h-full w-full grid-cols-3 grid-rows-2">
-                                            {stamps.map((Stamp, index) => (
-                                                <div
-                                                    key={index}
-                                                    className={cn(
-                                                        'grid place-items-center'
-                                                    )}
-                                                >
-                                                    {Stamp !== '' && (
-                                                        <img
-                                                            src={Stamp}
-                                                            className="h-4/5 w-4/5 overflow-hidden object-contain"
-                                                            alt={`Stamp ${index + 1}`}
-                                                            style={{
-                                                                padding: `0.${(index + 6) % 6}rem`,
-                                                                transform: `translate(${(index - 2) % 2}5%, ${(index - 2) % 2}5%) rotate(${rotations[index]}deg)`,
-                                                            }}
-                                                        />
-                                                    )}
-                                                </div>
-                                            ))}
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                position: 'relative',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                transform: `translate(${translateX[1]}%, ${translateY[1]}%) rotate(${rotations[1]}deg)`,
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #2 */}
+                                            <S2
+                                                heightLocked={heightLocked[1]}
+                                            />
                                         </div>
-                                    </section>
-                                </main>
-                            </section>
-                        </main>
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                position: 'relative',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                transform: `translate(${translateX[2]}%, ${translateY[2]}%) rotate(${rotations[2]}deg)`,
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #3 */}
+                                            <S3
+                                                heightLocked={heightLocked[2]}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div
+                                        style={{
+                                            flex: 1,
+                                            display: 'flex',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                position: 'relative',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                transform: `translate(${translateX[3]}%, ${translateY[3]}%) rotate(${rotations[3]}deg)`,
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #4 */}
+                                            <S4
+                                                heightLocked={heightLocked[3]}
+                                            />
+                                        </div>
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                position: 'relative',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                transform: `translate(${translateX[4]}%, ${translateY[4]}%) rotate(${rotations[4]}deg)`,
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #5 */}
+                                            <S5
+                                                heightLocked={heightLocked[4]}
+                                            />
+                                        </div>
+                                        <div
+                                            style={{
+                                                flex: 1,
+                                                display: 'flex',
+                                                position: 'relative',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                transform: `translate(${translateX[5]}%, ${translateY[5]}%) rotate(${rotations[5]}deg)`,
+                                            }}
+                                        >
+                                            {/* Place Stamp Here #6 */}
+                                            <S6
+                                                heightLocked={heightLocked[5]}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -152,25 +406,23 @@ export async function GET(request: NextRequest) {
         {
             width: 540,
             height: 960,
-            fonts: [],
+            fonts: [
+                {
+                    name: 'sov',
+                    data: sovRegularArrayBuffer,
+                    weight: 400,
+                    style: 'normal',
+                },
+            ],
         }
     );
 
-    const resvg = new Resvg(svg, {
-        fitTo: {
-            mode: 'width',
-            value: 1200,
-        },
-    });
+    const png = await sharp(Buffer.from(svg)).png().toBuffer();
 
-    const pngData = resvg.render();
-    const pngBuffer = pngData.asPng();
-
-    return new Response(pngBuffer, {
+    return new Response(png, {
         headers: {
             'Content-Type': 'image/png',
-            'Content-Disposition':
-                'attachment; filename=larngearfest-2024-eiei.png',
+            'Content-Disposition': 'attachment; filename=larngearfest-2024.png',
         },
     });
 }
