@@ -1,7 +1,8 @@
 'use client';
 
 import { Tapes } from '@/const/tape';
-import Image, { StaticImageData } from 'next/image';
+import { STAMPS } from '@/const/stamp';
+import Image from 'next/image';
 import { CardMode } from '@/app/card/page';
 import { cn } from '@/lib/utils';
 const rotations = [-15, 10, 20, -40, -10, 10];
@@ -9,7 +10,7 @@ const translateX = [-10, 30, 0, -20, -20, 20];
 const translateY = [-10, -20, 0, -10, 20, 20];
 
 interface ChooseStampProps {
-    stamps: string[];
+    stamps: number[];
     tapeColor?: string;
     selected?: number | null;
     phase?: CardMode;
@@ -44,9 +45,9 @@ export default function ChooseStamp(props: ChooseStampProps) {
                         })}
                         onClick={() => setSelected?.(index)}
                     >
-                        {Stamp !== '' && (
+                        {Stamp !== 0 && (
                             <Image
-                                src={Stamp}
+                                src={STAMPS[Stamp]}
                                 className="h-4/5 w-4/5 overflow-hidden object-contain"
                                 alt={`Stamp ${index + 1}`}
                                 style={{

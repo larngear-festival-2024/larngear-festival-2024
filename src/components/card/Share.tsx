@@ -2,12 +2,12 @@ import Image from 'next/image';
 import Logo from '@public/logo.svg';
 import ChooseStamp from './ChooseStamp';
 import { useState, useEffect } from 'react';
+
 interface ShareProps {
     name: string;
     tapecolor: string;
-    stamps: string[];
-    handleShareNormal: () => void;
-    handleShareTransparent: () => void;
+    backgroundcolor: string;
+    stamps: number[];
 }
 
 export default function Share(props: ShareProps) {
@@ -55,7 +55,7 @@ export default function Share(props: ShareProps) {
                     </h1>
                 </section>
                 <section className="mb-8 grid w-full place-items-center bg-white py-1 text-4xl text-project-dark-blue">
-                    {name.slice(0, 20)}
+                    {name.slice(0, 16)}
                 </section>
                 <ChooseStamp tapeColor={tapecolor} stamps={stamps} />
             </main>
