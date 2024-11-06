@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Footer from '@/components/footer';
 
-const OPENING_TIME = +new Date(2024, 10, 7, 0, 0, 0, 0);
+const OPENING_TIME = +new Date(2024, 10, 7, 16, 30, 0, 0);
 
 interface TimeLeft {
     days: number;
